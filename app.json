@@ -8,9 +8,9 @@
     "stack": "container",
   "env": {
     "SESSION_ID": {
-      "description": "Set your session id starting with the prefix 'POPKID;;;'. Example: POPKID;;;LZtnkKKL#wON0UKqd_Uh8mWg05tbSWMsn-JE56QzknHXPv_qT3nU",
+      "description": "Session id. Must start with prefix 'POPKID;;;' followed by the token.",
       "required": false,
-      "value": "POPKID;;;"
+      "value": ""
     },
       "BOT_NAME": {
         "description": "write here your bot name.",
@@ -48,7 +48,7 @@
 
     ,
     "SESSION_URL": {
-      "description": "Optional direct URL to session file (supports mega.nz links). When set on Heroku, the bot will auto-download it.",
+      "description": "Optional URL to session creds (mega.nz or direct HTTPS). Preferred for Heroku.",
       "required": false,
       "value": ""
     }
