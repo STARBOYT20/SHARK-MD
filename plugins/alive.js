@@ -30,7 +30,7 @@ cmd({
 
         // Send alive message with image
         await conn.sendMessage(from, {
-            image: { url: 'https://files.catbox.moe/jwmx1j.jpg' },
+            image: { url: 'https://files.catbox.moe/k4h5mm.png' },
             caption: aliveMessage
         }, { quoted: mek });
 

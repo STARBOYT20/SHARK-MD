@@ -54,9 +54,9 @@ END:VCARD`;
                 mentionedJid: [sender],
                 forwardingScore: 999,
                 isForwarded: true,
-                forwardedNewsletterMessageInfo: {
+                    forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363420222821450@newsletter',
-                    newsletterName: "𝐒𝐈𝐋𝐀 𝐓𝐄𝐂𝐇",
+                    newsletterName: "SHARK TECH",
                     serverMessageId: 100
                 }
             }

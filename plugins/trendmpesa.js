@@ -28,7 +28,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
                         newsletterJid: '120363420222821450@newsletter',
-                        newsletterName: "𝐒𝐈𝐋𝐀 𝐓𝐄𝐂𝐇 𝐏𝐀𝐘𝐌𝐄𝐍𝐓",
+                        newsletterName: "SHARK TECH PAYMENT",
                         serverMessageId: 143
                     }
                 }

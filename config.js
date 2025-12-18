@@ -32,7 +32,7 @@ ANTI_LINK: process.env.ANTI_LINK || "true",
 // make anti link true,false for groups 
 MENTION_REPLY: process.env.MENTION_REPLY || "true",
 // make true if want auto voice reply if someone menetion you 
-MENU_IMAGE_URL: process.env.MENU_IMAGE_URL || "https://files.catbox.moe/jwmx1j.jpg",
+MENU_IMAGE_URL: process.env.MENU_IMAGE_URL || "https://files.catbox.moe/k4h5mm.png",
 // add custom menu and mention reply image url
 PREFIX: process.env.PREFIX || ".",
 // add your prifix for bot   
@@ -52,7 +52,7 @@ OWNER_NAME: process.env.OWNER_NAME || "STARBOY",
 // add bot owner name
 DESCRIPTION: process.env.DESCRIPTION || "*© Powered by STARBOY*",
 // add bot owner name    
-ALIVE_IMG: process.env.ALIVE_IMG || "https://files.catbox.moe/jwmx1j.jpg",
+ALIVE_IMG: process.env.ALIVE_IMG || "https://files.catbox.moe/k4h5mm.png",
 // add img for alive msg
 LIVE_MSG: process.env.LIVE_MSG || "> Powered by STARBOY *☠",
 // add alive msg here 

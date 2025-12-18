@@ -179,20 +179,8 @@ async function connectToWA() {
           console.log('[ ✔ ] Plugins installed successfully ✅')
           console.log('[ 🪀 ] Bot connected to WhatsApp 📲')
 
-          let up = `*Hᴇʟʟᴏ ᴛʜᴇʀᴇ ꜱɪʟᴀ ᴍᴅ s2 ᴄᴏɴɴᴇᴄᴛᴇᴅ! 👋🏻* 
-
-*ᴋᴇᴇᴘ ᴏɴ ᴜsɪɴɢ ꜱɪʟᴀ ᴍᴅ ʙᴏᴛ☠* 
-
-> sᴜʙsᴄʀɪʙᴇ ʏᴛ ᴄʜᴀɴɴᴇʟ ғᴏʀ ᴛᴜᴛᴏʀɪᴀʟs
-https://www.youtube.com/@silatrix22
-
-> *ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ ➡️*
-https://whatsapp.com/channel/0029Vb6H6jF9hXEzZFlD6F3d
-
-> ᴅᴏɴᴛ ғᴏʀɢᴇᴛ ᴛᴏ sʜᴀʀᴇ, ᴡɪᴛʜ ᴏᴛʜᴇʀꜱ ⬇️
-
-> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ꜱɪʟᴀ ᴍᴅ`;
-    conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/jwmx1j.jpg` }, caption: up })
+              let up = `*Hello there SHARK MD is connected! 👋🏻*\n\n*Keep using SHARK MD bot*\n\n> *Main channel:*\nhttps://whatsapp.com/channel/0029Vb6H6jF9hXEzZFlD6F3d\n\n> © Powered by STARBOY`;
+            conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/k4h5mm.png` }, caption: up })
 
           const channelJid = "120363420222821450@newsletter"
           try {

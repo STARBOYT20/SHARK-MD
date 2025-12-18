@@ -29,9 +29,9 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
                     mentionedJid: [m.sender],
                     forwardingScore: 999,
                     isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
+                        forwardedNewsletterMessageInfo: {
                         newsletterJid: '120363420222821450@newsletter',
-                        newsletterName: "𝐒𝐈𝐋𝐀 𝐓𝐄𝐂𝐇  𝐀𝐃𝐔𝐋𝐓 𝐌𝐄𝐍𝐔🔞🔞₊",
+                        newsletterName: "SHARK TECH ADULT MENU",
                         serverMessageId: 143
                     }
                 }

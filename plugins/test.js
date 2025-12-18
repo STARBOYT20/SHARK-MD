@@ -45,11 +45,11 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363420222821450@newsletter',
-                    newsletterName: "𝐒𝐈𝐋𝐀 𝐓𝐄𝐂𝐇",
+                    newsletterName: "SHARK TECH",
                     serverMessageId: 143
                 },
                 externalAdReply: {
-                    title: "ꜱɪʟᴀ-ᴍᴅ",
+                    title: "SHARK MD",
                     body: "Multi-Device WhatsApp Bot",
                     thumbnailUrl: "https://files.catbox.moe/k4h5mm.png",
                     mediaType: 1,

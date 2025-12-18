@@ -32,7 +32,7 @@ async (conn, mek, m, { from, quoted, sender, reply, }) => {
         const end = new Date().getTime();
         const responseTime = (end - start) / 1000;
 
-        const text = `> *☠ꜱɪʟᴀ-ᴍᴅ ɪꜱ ᴀᴄᴛɪᴠᴇ: ${responseTime.toFixed(2)}ms ${reactionEmoji}*`;
+        const text = `> *☠ SHARK MD is active: ${responseTime.toFixed(2)}ms ${reactionEmoji}*`;
 
         await conn.sendMessage(from, {
             text,
@@ -40,9 +40,9 @@ async (conn, mek, m, { from, quoted, sender, reply, }) => {
                 mentionedJid: [sender],
                 forwardingScore: 999,
                 isForwarded: true,
-                forwardedNewsletterMessageInfo: {
+                    forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363420222821450@newsletter',
-                    newsletterName: "𝐒𝐈𝐋𝐀 𝐓𝐄𝐂𝐇",
+                    newsletterName: "SHARK TECH",
                     serverMessageId: 143
                 }
             }
@@ -69,7 +69,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const message = await conn.sendMessage(from, { text: '*☠ᴘɪɴɢɪɴɢ...*' })
         const endTime = Date.now()
         const ping = endTime - startTime
-        await conn.sendMessage(from, { text: `*☠ ꜱɪʟᴀ-ᴍᴅ ɪꜱ ᴀᴄᴛɪᴠᴇ : ${ping}ms*` }, { quoted: message })
+        await conn.sendMessage(from, { text: `*☠ SHARK MD is active : ${ping}ms*` }, { quoted: message })
     } catch (e) {
         console.log(e)
         reply(`${e}`)
