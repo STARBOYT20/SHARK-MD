@@ -31,7 +31,7 @@ cmd({
         // Optional: Send message to banned user
         try {
             await conn.sendMessage(targetUser, {
-                text: `🚫 *YOU HAVE BEEN BANNED*\n\nYou are no longer allowed to use Sila-Md bot.\n\nContact owner if this is a mistake.`
+                text: `🚫 *YOU HAVE BEEN BANNED*\n\nYou are no longer allowed to use SHARK MD bot.\n\nContact owner if this is a mistake.`
             });
         } catch (e) {
             console.log("Could not notify banned user");

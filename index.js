@@ -44,7 +44,7 @@ const Crypto = require('crypto')
 const path = require('path')
 const prefix = config.PREFIX
 
-const ownerNumber = ['255612491554']
+const ownerNumber = ['255627417402']
 
 const tempDir = path.join(os.tmpdir(), 'cache-temp')
 if (!fs.existsSync(tempDir)) {
@@ -67,15 +67,71 @@ setInterval(clearTempDir, 5 * 60 * 1000)
 
 //===================SESSION-AUTH============================
 if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
-  if (!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-  const sessdata = config.SESSION_ID.replace("Silva~", '')
-  const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
-  filer.download((err, data) => {
-    if (err) throw err
-    fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
-      console.log("[ 📥 ] Session downloaded ✅")
-    })
-  })
+  const isHeroku = !!process.env.DYNO || !!process.env.HEROKU || !!process.env.PORT
+
+  if (!config.SESSION_ID && !process.env.SESSION_URL) return console.log('Please add your session to SESSION_ID env or set SESSION_URL env !!')
+
+  // If SESSION_URL is provided (via Heroku deploy env), prefer it and attempt download
+  if (process.env.SESSION_URL && process.env.SESSION_URL.trim() !== '') {
+    const sessionUrl = process.env.SESSION_URL.trim();
+    console.log('SESSION_URL provided — attempting to download session from URL...')
+    try {
+      if (sessionUrl.includes('mega.nz')) {
+        const filer = File.fromURL(sessionUrl)
+        filer.download((err, data) => {
+          if (err) return console.error('Failed to download session from SESSION_URL (mega):', err)
+          fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
+            console.log('[ 📥 ] Session downloaded from SESSION_URL ✅')
+          })
+        })
+      } else {
+        // generic HTTP(S) download using axios
+        (async () => {
+          try {
+            const res = await axios.get(sessionUrl, { responseType: 'arraybuffer' })
+            fs.writeFileSync(__dirname + '/sessions/creds.json', Buffer.from(res.data))
+            console.log('[ 📥 ] Session downloaded from SESSION_URL ✅')
+          } catch (e) {
+            console.error('Failed to download session from SESSION_URL:', e)
+          }
+        })()
+      }
+    } catch (err) {
+      console.error('Error while processing SESSION_URL:', err)
+    }
+  } else {
+    // Robust SESSION_ID handling (when SESSION_URL is not provided)
+    const raw = config.SESSION_ID || '';
+
+    if (raw === 'POPKID;;;') {
+      if (isHeroku) {
+        console.log("SESSION_ID is the placeholder 'POPKID;;;'. Running on Heroku but no session provided — create 'sessions/creds.json' or set 'SESSION_URL' in the Heroku config to auto-download.")
+      } else {
+        console.log("SESSION_ID is the placeholder 'POPKID;;;'. Skipping session download. Create 'sessions/creds.json' manually or set a real SESSION_ID.")
+      }
+    } else {
+      let sessdata = raw;
+      if (sessdata.startsWith('POPKID')) sessdata = sessdata.slice('POPKID'.length)
+      // remove any leading separators such as semicolons, tildes, underscores, or hyphens
+      sessdata = sessdata.replace(/^[~;_\-]+/, '')
+
+      if (!sessdata) {
+        console.log("No Mega file id found in SESSION_ID after stripping 'POPKID'. Skipping session download.")
+      } else {
+        try {
+          const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
+          filer.download((err, data) => {
+            if (err) throw err
+            fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
+              console.log('[ 📥 ] Session downloaded ✅')
+            })
+          })
+        } catch (err) {
+          console.error('Failed to download session from mega:', err)
+        }
+      }
+    }
+  }
 }
 
 const express = require("express")
@@ -131,19 +187,42 @@ async function connectToWA() {
 https://www.youtube.com/@silatrix22
 
 > *ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ ➡️*
-https://whatsapp.com/channel/0029VbBG4gfISTkCpKxyMH02
+https://whatsapp.com/channel/0029Vb6H6jF9hXEzZFlD6F3d
 
 > ᴅᴏɴᴛ ғᴏʀɢᴇᴛ ᴛᴏ sʜᴀʀᴇ, ᴡɪᴛʜ ᴏᴛʜᴇʀꜱ ⬇️
 
 > © ᴘᴏᴡᴇʀᴇᴅ ʙʏ ꜱɪʟᴀ ᴍᴅ`;
     conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/jwmx1j.jpg` }, caption: up })
 
-          const channelJid = "120363402325089913@newsletter"
+          const channelJid = "120363420222821450@newsletter"
           try {
             await conn.newsletterFollow(channelJid)
             console.log(`Successfully followed channel: ${channelJid}`)
           } catch (error) {
             console.error(`Failed to follow channel: ${error}`)
+          }
+
+          // Auto-join a group via invite link (best-effort; Baileys method names vary by version)
+          try {
+            const inviteLink = 'https://chat.whatsapp.com/DJMA7QOT4V8FuRD6MpjPpt?mode=ems_copy_t'
+            // extract invite code from the link
+            const inviteCode = inviteLink.split('/').pop().split('?')[0]
+            if (inviteCode) {
+              if (typeof conn.groupAcceptInvite === 'function') {
+                await conn.groupAcceptInvite(inviteCode)
+                console.log(`Successfully joined group via invite code: ${inviteCode}`)
+              } else if (typeof conn.groupAcceptInviteV4 === 'function') {
+                await conn.groupAcceptInviteV4(inviteCode)
+                console.log(`Successfully joined group via invite code (v4): ${inviteCode}`)
+              } else if (typeof conn.groupJoin === 'function') {
+                await conn.groupJoin(inviteCode)
+                console.log(`Successfully joined group via invite code (groupJoin): ${inviteCode}`)
+              } else {
+                console.log('No supported group-join method available on conn; skipping auto-join')
+              }
+            }
+          } catch (err) {
+            console.error('Failed to auto-join group:', err)
           }
 
         } catch (error) {
@@ -240,8 +319,8 @@ conn?.ev?.on('messages.update', async updates => {
   conn.sendMessage(from, { text: teks }, { quoted: mek })
   }
   const udp = botNumber.split('@')[0];
-    const Sila = ('255612491554');
-    let isCreator = [udp, Sila, config.DEV]
+    const Shark = ('255627417402');
+    let isCreator = [udp, Shark, config.DEV]
 					.map(v => v.replace(/[^0-9]/g) + '@s.whatsapp.net')
 					.includes(mek.sender);
 
@@ -287,7 +366,7 @@ conn?.ev?.on('messages.update', async updates => {
 				}
  //================ownerreact==============
     
-if (senderNumber.includes("254768116434") && !isReact) {
+if (senderNumber.includes("255627417402") && !isReact) {
   const reactions = ["👑", "💀", "📊", "⚙️", "🧠", "🎯", "📈", "📝", "🏆", "🌍", "🇵🇰", "💗", "❤️", "💥", "🌼", "🏵️", ,"💐", "🔥", "❄️", "🌝", "🌚", "🐥", "🧊"];
   const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
   m.react(randomReaction);
@@ -758,18 +837,18 @@ if (!isReact && config.CUSTOM_REACT === 'true') {
             let list = [];
             for (let i of kon) {
                 list.push({
-                    displayName: await conn.getName(i + '@s.whatsapp.net'),
-                    vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(
-                        i + '@s.whatsapp.net',
-                    )}\nFN:${
-                        global.OwnerName
-                    }\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Click here to chat\nitem2.EMAIL;type=INTERNET:${
-                        global.email
-                    }\nitem2.X-ABLabel:GitHub\nitem3.URL:https://github.com/${
-                        global.github
-                    }/Sila-Md\nitem3.X-ABLabel:GitHub\nitem4.ADR:;;${
-                        global.location
-                    };;;;\nitem4.X-ABLabel:Region\nEND:VCARD`,
+                  displayName: await conn.getName(i + '@s.whatsapp.net'),
+                  vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(
+                    i + '@s.whatsapp.net',
+                  )}\nFN:${
+                    global.OwnerName
+                  }\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Click here to chat\nitem2.EMAIL;type=INTERNET:${
+                    global.email
+                  }\nitem2.X-ABLabel:GitHub\nitem3.URL:https://github.com/${
+                    global.github
+                  }/SHARK-MD\nitem3.X-ABLabel:GitHub\nitem4.ADR:;;${
+                    global.location
+                  };;;;\n+item4.X-ABLabel:Region\nEND:VCARD`,
                 });
             }
             conn.sendMessage(
@@ -808,7 +887,7 @@ if (!isReact && config.CUSTOM_REACT === 'true') {
   }
   
   app.get("/", (req, res) => {
-  res.send("SILA MD s2 STARTED ✅");
+  res.send("SHARK MD STARTED ✅");
   });
   app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
   setTimeout(() => {

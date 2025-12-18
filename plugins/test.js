@@ -21,7 +21,7 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
         const randomUrl = songUrls[Math.floor(Math.random() * songUrls.length)];
 
         // Fake verified contact as quoted message
-        const fakeContact = {
+                const fakeContact = {
             key: {
                 fromMe: false,
                 participant: "0@s.whatsapp.net",
@@ -29,8 +29,8 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
             },
             message: {
                 contactMessage: {
-                    displayName: "SILA-MD VERIFIED ✅",
-                    vcard: "BEGIN:VCARD\nVERSION:3.0\nFN:SILA-MD\nORG:BRIAN;\nTEL;type=CELL;type=VOICE;waid=255700000000:+255700000000\nEND:VCARD"
+                    displayName: "ArnoldT20 VERIFIED ✅",
+                    vcard: "BEGIN:VCARD\nVERSION:3.0\nFN:ArnoldT20\nORG:ArnoldT20;\nTEL;type=CELL;type=VOICE;waid=255627417402:+255627417402\nEND:VCARD"
                 }
             }
         };
@@ -44,14 +44,14 @@ async (conn, mek, m, { from, quoted, sender, reply }) => {
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363422610520277@newsletter',
+                    newsletterJid: '120363420222821450@newsletter',
                     newsletterName: "𝐒𝐈𝐋𝐀 𝐓𝐄𝐂𝐇",
                     serverMessageId: 143
                 },
                 externalAdReply: {
                     title: "ꜱɪʟᴀ-ᴍᴅ",
                     body: "Multi-Device WhatsApp Bot",
-                    thumbnailUrl: "https://n.uguu.se/enxBsCxO.jpg",
+                    thumbnailUrl: "https://files.catbox.moe/k4h5mm.png",
                     mediaType: 1,
                     renderLargerThumbnail: true,
                     showAdAttribution: true

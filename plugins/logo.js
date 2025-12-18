@@ -43,7 +43,7 @@ cmd({
 *Available Styles:*
 ${stylesList}
 
-*Example:* .logo metallic Sila
+*Example:* .logo metallic Shark
 *Example:* .logo neon Bot
             `.trim();
             return reply(usage);
@@ -54,7 +54,7 @@ ${stylesList}
         const text = parts.slice(1).join(' ');
 
         if (!text) {
-            return reply("❌ Please provide text after the style\nExample: .logo metallic Sila");
+            return reply("❌ Please provide text after the style\nExample: .logo metallic Shark");
         }
 
         if (!textStyles[style]) {
@@ -71,7 +71,7 @@ ${stylesList}
 
         await conn.sendMessage(from, {
             image: { url: result.image },
-            caption: `🎨 *${textStyles[style].name.toUpperCase()} LOGO*\n\n📝 *Text:* ${text}\n\n🔗 *Powered by Sila-Md*`
+            caption: `🎨 *${textStyles[style].name.toUpperCase()} LOGO*\n\n📝 *Text:* ${text}\n\n🔗 *Powered by STARBOY*`
         }, { quoted: mek });
 
     } catch (e) {

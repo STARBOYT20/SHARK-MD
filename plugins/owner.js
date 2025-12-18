@@ -9,16 +9,16 @@ cmd({
 }, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
         const ownerInfo = `
-👑 *SILA-MD OWNER* 👑
+    👑 *OWNER — STARBOY* 👑
 
-🤖 *Bot Name:* *Sila-Md*
-👨‍💻 *Developer:* *Sir Sila*
-📞 *Contact:* *+255612491554*
-📧 *Email:* *silatrix22@email.com*
+    🤖 *Bot Name:* *SHARK MD*
+    👨‍💻 *Developer:* *STARBOY*
+    📞 *Contact:* *+255627417402*
+    📧 *Email:* *atarimo117@gmail.com*
 
-💬 *For any issues or inquiries, feel free to contact the owner!*
+    💬 *For any issues or inquiries, feel free to contact the owner!*
 
-🔗 *Powered by Sila-Md*
+    🔗 *Powered by STARBOY*
         `.trim();
 
         // Send owner info as text
@@ -27,13 +27,13 @@ cmd({
         // You can also send owner's contact card if needed
         // const vcard = 'BEGIN:VCARD\n' +
         //     'VERSION:3.0\n' +
-        //     'FN:Sila\n' +
-        //     'ORG:Sila-Md Developer;\n' +
-        //     'TEL;type=CELL;type=VOICE;waid=255612491554:+255612491554\n' +
+        //     'FN:ArnoldT20\n' +
+        //     'ORG:ArnoldT20;\n' +
+        //     'TEL;type=CELL;type=VOICE;waid=255627417402:+255627417402\n' +
         //     'END:VCARD';
         // await conn.sendMessage(from, {
         //     contacts: {
-        //         displayName: 'SILA MD',
+        //         displayName: 'ArnoldT20',
         //         contacts: [{ vcard }]
         //     }
         // }, { quoted: mek });

@@ -1,21 +1,21 @@
 {
-  "name": "SILA-MD",
+  "name": "SHARK MD",
   "description": "Javascript WhatsApp bot made by  Brian",
-  "logo": "https://n.uguu.se/enxBsCxO.jpg",
-  "keywords": ["SILA-MD"],
+  "logo": "https://files.catbox.moe/k4h5mm.png",
+  "keywords": ["SHARK-MD"],
   "success_url": "/",
 
     "stack": "container",
   "env": {
     "SESSION_ID": {
-      "description": "Must Start with 'Sila~'",
+      "description": "Set your session id exactly as: POPKID;;;",
       "required": false,
-      "value": ""
+      "value": "POPKID;;;"
     },
       "BOT_NAME": {
         "description": "write here your bot name.",
         "required": true,
-        "value": "SILA-MD-s2"      
+        "value": "SHARK MD"      
     },  
     "MODE": {
       "description": "Set private/public/inbox/groups",
@@ -32,18 +32,25 @@
     "OWNER_NAME": {
       "description": "Put Owner Name Here",
       "required": true,
-      "value": "SILA"
+      "value": "STARBOY"
     },
     "OWNER_NUMBER": {
       "description": "Put only one Owner Number Here",
       "required": true,
-      "value": "255612491554"
+      "value": "255627417402"
     },
     
     "PRESENCE": {
       "description": "Put online/typing/recording/unavailable",
       "required": true,
       "value": "online"
+    }
+
+    ,
+    "SESSION_URL": {
+      "description": "Optional direct URL to session file (supports mega.nz links). When set on Heroku, the bot will auto-download it.",
+      "required": false,
+      "value": ""
     }
 
 },

@@ -44,7 +44,7 @@ cmd({
             forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363402325089913@newsletter',
+                newsletterJid: '120363420222821450@newsletter',
                 newsletterName:'𝐒𝐈𝐋𝐀 𝐓𝐄𝐂𝐇' ,
                 serverMessageId: 143
             }

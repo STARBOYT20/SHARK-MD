@@ -58,7 +58,7 @@ async function handleChatbot(message, conn) {
 
         // Reply in Swahili/English mix
         await conn.sendMessage(message.key.remoteJid, { 
-            text: `🤖 ${response}\n\n_Powered by Sila-Md_` 
+            text: `🤖 ${response}\n\n_Powered by STARBOY_` 
         }, { quoted: message });
 
     } catch (error) {

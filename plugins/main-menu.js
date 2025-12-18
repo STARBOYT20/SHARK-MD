@@ -353,7 +353,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
                     forwardingScore: 999,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363402325089913@newsletter',
+                        newsletterJid: '120363420222821450@newsletter',
                         newsletterName: config.BOT_NAME,
                         serverMessageId: 143
                     }

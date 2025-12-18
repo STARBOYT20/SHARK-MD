@@ -14,10 +14,10 @@ cmd({
         const seconds = Math.floor(uptime % 60);
 
         const aliveMessage = `
-🤖 *SILA-MD IS ALIVE!* 🟢
+    🤖 *SHARK MD IS ALIVE!* 🟢
 
-👤 *User:* ${pushname}
-📱 *Bot Name:* Sila-Md
+    👤 *User:* ${pushname}
+    📱 *Bot Name:* SHARK MD
 ⏰ *Uptime:* ${hours}h ${minutes}m ${seconds}s
 🔄 *Version:* 0.0.5
 💻 *Platform:* ${process.platform}
@@ -25,7 +25,7 @@ cmd({
 
 📍 *Type* .menu *to see all commands*
 
-🔗 *Powered by Sila-Md*
+🔗 *Powered by STARBOY*
         `.trim();
 
         // Send alive message with image
@@ -37,6 +37,6 @@ cmd({
     } catch (e) {
         console.error("Error:", e);
         // Fallback to text only if image fails
-        reply(`🤖 *SILA-MD IS ALIVE!* 🟢\n\nUser: ${pushname}\nBot is running smoothly!\n\n🔗 *Powered by Sila-Md*`);
+        reply(`🤖 *SHARK MD IS ALIVE!* 🟢\n\nUser: ${pushname}\nBot is running smoothly!\n\n🔗 *Powered by STARBOY*`);
     }
 });
