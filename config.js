@@ -5,8 +5,10 @@ function convertToBool(text, fault = 'true') {
     return text === fault ? true : false;
 }
 module.exports = {
+// SESSION_ID must start with the literal prefix 'POPKID;;;' followed by the session token.
+// Example: POPKID;;;LZtnkKKL#wON0UKqd_Uh8mWg05tbSWMsn-JE56QzknHXPv_qT3nU
+// For Heroku deploys prefer setting `SESSION_URL` to a direct URL to the creds file.
 SESSION_ID: process.env.SESSION_ID || "POPKID;;;",
-// add your Session Id 
 AUTO_STATUS_SEEN: process.env.AUTO_STATUS_SEEN || "true",
 // make true or false status auto seen
 AUTO_STATUS_REPLY: process.env.AUTO_STATUS_REPLY || "false",

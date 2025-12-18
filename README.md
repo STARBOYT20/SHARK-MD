@@ -15,11 +15,15 @@ SHARK-MD is a responsive WhatsApp multi-device bot built with Node.js and the Ba
 **Quick Deploy (Heroku)**
 1. Click the **Deploy to Heroku** button above.
 2. On the Heroku page, choose your app name and set any required environment variables. Recommended env vars:
-	- `SESSION_ID` — (optional) your session identifier
+	- `SESSION_ID` — (optional) your session identifier. It must start with the literal prefix `POPKID;;;` followed by the session token. Example:
+		`POPKID;;;LZtnkKKL#wON0UKqd_Uh8mWg05tbSWMsn-JE56QzknHXPv_qT3nU`
+		(If deploying to Heroku, it's easier to set `SESSION_URL` to a direct URL to the creds file.)
 	- `BOT_NAME` — bot display name (default: `SHARK MD`)
 	- `OWNER_NAME` — set to `STARBOY` or your preferred owner name
 	- `OWNER_NUMBER` — the owner WhatsApp number (e.g. `255627417402`)
 	- `PREFIX` — command prefix (default: `.`)
+	- `MENU_IMAGE_URL` — URL to menu image (optional)
+	- `SESSION_URL` — (optional) direct URL to the session creds file (preferred for Heroku). Supports Mega links (`https://mega.nz/file/<id>`) or direct HTTPS file URLs.
 	- `MENU_IMAGE_URL` — URL to menu image (optional)
 3. Deploy. Heroku will build and run the bot using the provided `Procfile`.
 

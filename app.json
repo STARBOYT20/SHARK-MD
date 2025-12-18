@@ -8,7 +8,7 @@
     "stack": "container",
   "env": {
     "SESSION_ID": {
-      "description": "Set your session id exactly as: POPKID;;;",
+      "description": "Set your session id starting with the prefix 'POPKID;;;'. Example: POPKID;;;LZtnkKKL#wON0UKqd_Uh8mWg05tbSWMsn-JE56QzknHXPv_qT3nU",
       "required": false,
       "value": "POPKID;;;"
     },

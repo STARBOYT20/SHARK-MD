@@ -100,26 +100,26 @@ if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
       console.error('Error while processing SESSION_URL:', err)
     }
   } else {
-    // Robust SESSION_ID handling (when SESSION_URL is not provided)
+    // SESSION_ID handling (when SESSION_URL is not provided)
     const raw = config.SESSION_ID || '';
+    const requiredPrefix = 'POPKID;;;'
 
-    if (raw === 'POPKID;;;') {
+    if (raw === requiredPrefix) {
       if (isHeroku) {
         console.log("SESSION_ID is the placeholder 'POPKID;;;'. Running on Heroku but no session provided — create 'sessions/creds.json' or set 'SESSION_URL' in the Heroku config to auto-download.")
       } else {
         console.log("SESSION_ID is the placeholder 'POPKID;;;'. Skipping session download. Create 'sessions/creds.json' manually or set a real SESSION_ID.")
       }
+    } else if (!raw.startsWith(requiredPrefix)) {
+      console.log(`Invalid SESSION_ID format. All SESSION_ID values must start with the prefix '${requiredPrefix}'. Example: ${requiredPrefix}YOUR_SESSION_TOKEN`)
     } else {
-      let sessdata = raw;
-      if (sessdata.startsWith('POPKID')) sessdata = sessdata.slice('POPKID'.length)
-      // remove any leading separators such as semicolons, tildes, underscores, or hyphens
-      sessdata = sessdata.replace(/^[~;_\-]+/, '')
-
-      if (!sessdata) {
-        console.log("No Mega file id found in SESSION_ID after stripping 'POPKID'. Skipping session download.")
+      // Extract token after the required prefix. Token may contain '#' or other characters used by mega links.
+      const token = raw.slice(requiredPrefix.length)
+      if (!token) {
+        console.log("SESSION_ID contains the required prefix but no token after it. Please append the session token after 'POPKID;;;'.")
       } else {
         try {
-          const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
+          const filer = File.fromURL(`https://mega.nz/file/${token}`)
           filer.download((err, data) => {
             if (err) throw err
             fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
