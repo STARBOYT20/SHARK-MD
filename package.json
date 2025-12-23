@@ -6,9 +6,14 @@
   "description": "A WhatsApp Bot Created By Brian",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name SHARK-MD",
-    "stop": "pm2 stop SHARK-MD",
-    "restart": "pm2 restart SHARK-MD"
+    "start": "node index.js",
+    "dev": "node index.js",
+    "pm2:start": "pm2 start index.js --deep-monitoring --attach --name SHARK-MD",
+    "pm2:stop": "pm2 stop SHARK-MD",
+    "pm2:restart": "pm2 restart SHARK-MD"
+  },
+  "engines": {
+    "node": "18.x"
   },
   "dependencies": {
        "@whiskeysockets/baileys": "npm:baileys-pro@latest",
