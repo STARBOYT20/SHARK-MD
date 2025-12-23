@@ -1,9 +1,13 @@
 const { cmd } = require('../command');
 
-// Fixed & Created By Shark
+<<<<<<< HEAD
+// Fixed & Created By IMMU MD
+=======
+// Fixed & Created By T20 classic Ai
+>>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
 cmd({
   pattern: "hidetag",
-  alias: ["tag", "tagall"],  
+  alias: ["tag", "h"],  
   react: "🔊",
   desc: "To Tag all Members for Any Message/Media",
   category: "group",

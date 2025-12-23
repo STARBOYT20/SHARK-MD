@@ -75,7 +75,11 @@ cmd({
 
     await conn.sendMessage(m.chat, {
       image: imageBuffer,
-      caption: `> *Powered by STARBOY*`
+<<<<<<< HEAD
+      caption: `> *Powered by T20-CLASSIC-AI*`
+=======
+      caption: `> *Powered by JawadTechX*`
+>>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
     });
 
   } catch (error) {
