@@ -176,19 +176,6 @@ async function connectToWA() {
             }
           })
 
-          // Also load plugins placed under sessions/plugins (some setups use this folder)
-          try {
-            if (fs.existsSync("./sessions/plugins/")) {
-              fs.readdirSync("./sessions/plugins/").forEach((plugin) => {
-                if (path.extname(plugin).toLowerCase() === ".js") {
-                  require("./sessions/plugins/" + plugin)
-                }
-              })
-            }
-          } catch (e) {
-            console.error('[PLUGIN LOAD ERROR] sessions/plugins:', e)
-          }
-
           console.log('[ ✔ ] Plugins installed successfully ✅')
           console.log('[ 🪀 ] Bot connected to WhatsApp 📲')
 

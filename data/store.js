@@ -215,8 +215,4 @@ module.exports = {
     saveMessage: saveMessageV2,
 };
 
-<<<<<<< HEAD
-// codes by ImadAli 
-=======
-// codes by T20 classic Ai
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
+// codes by caseyrhodes 

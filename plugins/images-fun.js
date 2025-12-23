@@ -21,8 +21,10 @@ async(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, sen
 try{
 
 let res = await axios.get('https://api.lolicon.app/setu/v2?num=1&r18=0&tag=lolicon')
-let wm = `😎 Random Garl image\n\nPowered by STARBOY`
-await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png' }, caption: wm}, { quoted: mek })
+let wm = `😎 Random Garl image
+
+© Powered by STARBOY`
+await conn.sendMessage(from, { image: { url: res.data.data[0].urls.original }, caption: wm}, { quoted: mek })
 } catch (e) {
 reply(cants)
 console.log(e)
@@ -42,8 +44,10 @@ cmd({
 async(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 let res = await axios.get('https://api.waifu.pics/sfw/waifu')
-let wm = `🩵 Random Waifu image\n\nPowered by STARBOY`
-await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png' }, caption: wm}, { quoted: mek })
+let wm = `🩵 Random Waifu image
+
+© Powered by STARBOY`
+await conn.sendMessage(from, { image: { url: res.data.url }, caption: wm}, { quoted: mek })
 } catch (e) {
 reply(cants)
 console.log(e)
@@ -63,8 +67,10 @@ cmd({
 async(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 let res = await axios.get('https://api.waifu.pics/sfw/neko')
-let wm = `🩷 Random neko image\n\nPowered by STARBOY`
-await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png'  }, caption: wm}, { quoted: mek })
+let wm = `🩷 Random neko image
+
+© Powered by STARBOY`
+await conn.sendMessage(from, { image: { url: res.data.url  }, caption: wm}, { quoted: mek })
 } catch (e) {
 reply(cants)
 console.log(e)
@@ -84,8 +90,10 @@ cmd({
 async(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 let res = await axios.get('https://api.waifu.pics/sfw/megumin')
-let wm = `❤️‍🔥Random megumin image\n\nPowered by STARBOY`
-await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png' }, caption: wm}, { quoted: mek })
+let wm = `❤️‍🔥Random megumin image
+
+© Powered by STARBOY`
+await conn.sendMessage(from, { image: { url: res.data.url }, caption: wm}, { quoted: mek })
 } catch (e) {
 reply(cants)
 console.log(e)
@@ -105,8 +113,10 @@ cmd({
 async(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 let res = await axios.get('https://api.waifu.im/search/?included_tags=maid')
-let wm = `😎 Random maid image\n\nPowered by STARBOY`
-await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png'  }, caption: wm}, { quoted: mek })
+let wm = `😎 Random maid image
+
+© Powered by STARBOY`
+await conn.sendMessage(from, { image: { url: res.data.images[0].url  }, caption: wm}, { quoted: mek })
 } catch (e) {
 reply(cants)
 console.log(e)
@@ -126,8 +136,10 @@ cmd({
 async(conn, mek, m,{from, l, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 let res = await axios.get('https://api.waifu.pics/sfw/awoo')
-let wm = `😎 Random awoo image\n\nPowered by STARBOY`
-await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png' }, caption: wm}, { quoted: mek })
+let wm = `😎 Random awoo image
+
+© Powered by STARBOY`
+await conn.sendMessage(from, { image: { url: res.data.url }, caption: wm}, { quoted: mek })
 } catch (e) {
 reply(cants)
 console.log(e)
@@ -147,7 +159,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const response = await axios.get(apiUrl);
         const data = response.data;
 
-        await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png' }, caption: '*ANIME GIRL IMAGE* 🥳\n\n\n *> Powered by STARBOY*' }, { quoted: mek });
+            await conn.sendMessage(from, { image: { url: `https://files.catbox.moe/k4h5mm.png` }, caption: '*ANIME GIRL IMAGE* 🥳\n\n\n *> © Powered by STARBOY*' }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`*Error Fetching Anime Girl image*: ${e.message}`);
@@ -167,7 +179,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const response = await axios.get(apiUrl);
         const data = response.data;
 
-        await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png' }, caption: 'ANIME GIRL IMAGE 👾\n\n\n > Powered by STARBOY' }, { quoted: mek });
+            await conn.sendMessage(from, { image: { url: `https://files.catbox.moe/k4h5mm.png` }, caption: 'ANIME GIRL IMAGE 👾\n\n\n > © Powered by STARBOY' }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`*Error Fetching Anime Girl image*: ${e.message}`);
@@ -187,7 +199,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const response = await axios.get(apiUrl);
         const data = response.data;
 
-        await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png' }, caption: 'ANIME GIRL IMAGE 👾\n\n\n > Powered by STARBOY' }, { quoted: mek });
+            await conn.sendMessage(from, { image: { url: `https://files.catbox.moe/k4h5mm.png` }, caption: 'ANIME GIRL IMAGE 👾\n\n\n > © Powered by STARBOY' }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`*Error Fetching Anime Girl image*: ${e.message}`);
@@ -207,7 +219,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const response = await axios.get(apiUrl);
         const data = response.data;
 
-        await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png' }, caption: 'ANIME GIRL IMAGE 👾\n\n\n > Powered by STARBOY' }, { quoted: mek });
+            await conn.sendMessage(from, { image: { url: data.url }, caption: 'ANIME GIRL IMAGE 👾\n\n\n > © Powered by STARBOY' }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`*Error Fetching Anime Girl image*: ${e.message}`);
@@ -227,7 +239,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const response = await axios.get(apiUrl);
         const data = response.data;
 
-        await conn.sendMessage(from, { image: { url: data.url }, caption: 'ANIME GIRL IMAGE 👾\n\n\n > © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' }, { quoted: mek });
+            await conn.sendMessage(from, { image: { url: data.url }, caption: 'ANIME GIRL IMAGE 👾\n\n\n > © Powered by STARBOY' }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`*Error Fetching Anime Girl image*: ${e.message}`);
@@ -247,7 +259,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const response = await axios.get(apiUrl);
         const data = response.data;
 
-        await conn.sendMessage(from, { image: { url: data.url }, caption: 'ANIME GIRL IMAGE 👾\n\n\n > © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' }, { quoted: mek });
+        await conn.sendMessage(from, { image: { url: data.url }, caption: 'ANIME GIRL IMAGE 👾\n\n\n > © Powered by STARBOY' }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`*Error Fetching Anime Girl image*: ${e.message}`);
@@ -268,7 +280,7 @@ cmd({
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 
-let dec = `> SHARK MD ANIME IMGS*`
+let dec = `> SHARK ANIME IMGS`
 await conn.sendMessage(from,{image:{url: `https://files.catbox.moe/k4h5mm.png`},caption:dec},{quoted:mek});
 await conn.sendMessage(from,{image:{url: `https://files.catbox.moe/k4h5mm.png`},caption:dec},{quoted:mek});
 await conn.sendMessage(from,{image:{url: `https://files.catbox.moe/k4h5mm.png`},caption:dec},{quoted:mek});
@@ -294,27 +306,15 @@ cmd({
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 
-<<<<<<< HEAD
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/aD7t0Bc.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+        await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/PQO5wPN.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+        await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/5At1P4A.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+        await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/MjtH3Ha.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+        await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/QQW7VKy.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-=======
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> Powered by STARBOY' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> Powered by STARBOY' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> Powered by STARBOY' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> Powered by STARBOY' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> Powered by STARBOY' },{quoted:mek});
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
+        await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
 }catch(e){
 console.log(e)
@@ -332,27 +332,15 @@ cmd({
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 
-<<<<<<< HEAD
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/0r1Bn88.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/2Xdpuov.png` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/0hx-3AP.png` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/q054x0_.png` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/4lyqRvd.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-=======
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/w10gxl.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/w10gxl.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/w10gxl.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/w10gxl.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/w10gxl.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
 }catch(e){
 console.log(e)
@@ -371,27 +359,15 @@ cmd({
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 
-<<<<<<< HEAD
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/gnpc_Lr.jpeg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/P6X-ph6.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/~p5W9~k.png` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/7Apu5C9.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/OTRfON6.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-=======
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/w10gxl.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/w10gxl.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/w10gxl.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/w10gxl.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
-
-await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/w10gxl.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
 }catch(e){
 console.log(e)
@@ -410,15 +386,15 @@ cmd({
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/aGgUm80.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/i~RQhRD.png` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/94LH-aU.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/V8hvqfK.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/lMiXE7j.png` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
 }catch(e){
 console.log(e)
@@ -437,16 +413,15 @@ cmd({
 async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
 try{
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/-ABlAvr.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/HNEg0-Q.png` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/3x~ovC6.jpg` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/brv-GJu.jpg` },caption: 
-'> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
-await conn.sendMessage(from,{image :{ url: `https://i.waifu.pics/FWE8ggD.png` },caption: '> © ᴘᴏᴡᴇʀᴇᴅ ʙʏ Iᴍᴀᴅ  Aʟɪ' },{quoted:mek});
+    await conn.sendMessage(from,{image :{ url: `https://files.catbox.moe/k4h5mm.png` },caption: '> © Powered by STARBOY' },{quoted:mek});
 
 }catch(e){
 console.log(e)
@@ -467,9 +442,9 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const response = await axios.get(apiUrl);
         const data = response.data;
 
-        await conn.sendMessage(from, { image: { url: 'https://files.catbox.moe/k4h5mm.png' }, caption: '> Powered by STARBOY' }, { quoted: mek });
+        await conn.sendMessage(from, { image: { url: `https://files.catbox.moe/k4h5mm.png` }, caption: '> *© Powered by STARBOY*' }, { quoted: mek });
     } catch (e) {
-        console.log(e); // ❯❯ Powered by Iᴍᴀᴅ  Aʟɪ 👑
+        console.log(e); // ❯❯ Powered by CRISS-AI 👑
         reply(`єяяσя ƒєт¢нιηg ∂σg ιмαgє: ${e.message}`);
     }
 });

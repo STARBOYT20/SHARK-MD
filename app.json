@@ -1,238 +1,56 @@
 {
-<<<<<<< HEAD
-  "name": "T20-CLASSIC-AI",
-  "description": "Javascript WhatsApp bot made by T20_STARBOY",
-  "logo": "https://files.catbox.moe/8hkkds.jpg",
-  "keywords": ["T20-CLASSIC-AI"],
-=======
-  "name": "IMMU-MD",
-  "description": "Javascript WhatsApp bot made by Iᴍᴀᴅ Aʟɪ",
-  "logo": "https://files.catbox.moe/w10gxl.jpg",
-  "keywords": ["IMMU-MD"],
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
+  "name": "SHARK MD",
+  "description": "Javascript WhatsApp bot made by  Brian",
+  "logo": "https://files.catbox.moe/k4h5mm.png",
+  "keywords": ["SHARK-MD"],
   "success_url": "/",
 
     "stack": "container",
   "env": {
     "SESSION_ID": {
-      "description": "Put the session-id here.",
-      "required": true,
+      "description": "Session id. Must start with prefix 'POPKID;;;' followed by the token.",
+      "required": false,
       "value": ""
+    },
+      "BOT_NAME": {
+        "description": "write here your bot name.",
+        "required": true,
+        "value": "SHARK MD"      
     },  
-    
-    "STICKER_NAME": {
-      "description": "type your sticker pack name.",
+    "MODE": {
+      "description": "Set private/public/inbox/groups",
       "required": false,
-<<<<<<< HEAD
-      "value": "T20-CLASSIC-AI"
-=======
-      "value": "IMMU-MD"
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-    }, 
-      
+      "value": "public"
+     },
+   
     "PREFIX": {
-      "description": "paste your bot prefix note! Don't apply null prefix.",
-      "required": false,
+      "description": "Your Bot Prefix (default: .) You can put your own custom prefix",
+      "required": true,
       "value": "."
     },
     
-    "MODE": {
-      "description": "select your bot work type public-private-inbox-group.",
-      "required": false,
-      "value": "public"
-      
-    },
-
-     "ANTI_DELETE": {
-      "description": "set true for show deleted messages.",
-      "required": false,
-      "value": "true"  
-    },
-    
-    "ALWAYS_ONLINE": {
-      "description": "Make it true if want always online.",
-      "required": false,
-      "value": "false"  
-    },    
-   
-    "AUTO_REPLY": {
-      "description": "Make it true if you want automatic reply.",
-      "required": false,
-      "value": "false"
-    }, 
-
-    "AUTO_STICKER": {
-      "description": "Make it true if you want automatic sticker.",
-      "required": false,
-      "value": "false"
-    }, 
-
-
-    "AUTO_STATUS_SEEN": {
-      "description": "Make it true for automatic status seen.",
-      "required": true,
-      "value": "true"
-    }, 
-
-    "AUTO_STATUS_REACT": {
-      "description": "make it true for automatic status reaction or like.",
-      "required": true,
-      "value": "true"
-    }, 
-
-    "AUTO_STATUS_REPLY": {
-      "description": "Make it true for auto reply msg on status seen.",
-      "required": true,
-      "value": "false"
-    }, 
-
-    "AUTO_STATUS_MSG": {
-      "description": "Type custom message on status reply",
-      "required": true,
-<<<<<<< HEAD
-      "value": "*SEEN YOUR STATUS BY T20-CLASSIC-AI 🖤*"
-=======
-      "value": "*SEEN YOUR STATUS BY IMMU-MD 🖤*"
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-   
-     }, 
-    
     "OWNER_NAME": {
-      "description": "Type Bot Owner Name.",
-      "required": false,
-<<<<<<< HEAD
-      "value": "T20-CLASSIC-AI"
-=======
-      "value": "IMMU MD"
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-}, 
-
-    "OWNER_NUMBER": {
-      "description": "put the owner number for bot.",
-      "required": false,
-<<<<<<< HEAD
-      "value": "255627417402"
-=======
-      "value": "923493114170"
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-
-    }, 
-
-    "BOT_NAME": {
-      "description": "Type here the bot name.",
-      "required": false,
-<<<<<<< HEAD
-      "value": "T20-CLASSIC-AI"
-=======
-      "value": "IMMU-MD"
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-
-      }, 
-
-    "ANTI_LINK": {
-      "description": "Make it true if you want bot auto remove group link.",
+      "description": "Put Owner Name Here",
       "required": true,
-      "value": "true"
-      
+      "value": "STARBOY"
+    },
+    "OWNER_NUMBER": {
+      "description": "Put only one Owner Number Here",
+      "required": true,
+      "value": "255627417402"
     },
     
-    "ANTI_BAD": {
-      "description": "Make it true if you want bot auto delete bad words.",
-      "required": false,
-      "value": "false"
-    },
+    "PRESENCE": {
+      "description": "Put online/typing/recording/unavailable",
+      "required": true,
+      "value": "online"
+    }
 
-   "MENTION_REPLY": {
-      "description": "make it true if want mention reply if someone menetion you.",
+    ,
+    "SESSION_URL": {
+      "description": "Optional URL to session creds (mega.nz or direct HTTPS). Preferred for Heroku.",
       "required": false,
-      "value": "false"
-    },
-    
-    "MENU_IMAGE_URL": {
-      "description": "add url for mention reply and menu if want.",
-      "required": false,
-<<<<<<< HEAD
-      "value": "https://i.imgur.com/dJRyrlw.jpeg"
-=======
-      "value": "https://files.catbox.moe/w10gxl.jpg"
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-    },
-    
-     "DESCRIPTION": {
-      "description": "add caption for menu and other",
-      "required": false,
-<<<<<<< HEAD
-      "value": "*© ᴘᴏᴡᴇʀᴇᴅ ʙʏ T20-CLASSIC-AI*"
-=======
-      "value": "*© ᴘᴏᴡᴇʀᴇᴅ ʙʏ IMMU MD*"
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-    },
-
-      "DELETE_LINKS": {
-      "description": "remove links from group automatically without removing member",
-      "required": false,
-      "value": "false"
-    },
-    
-    "AUTO_RECORDING": {
-      "description": "Make it true if you want auto recoding.",
-      "required": false,
-      "value": "false"
-    },
-
-    "AUTO_TYPING": {
-      "description": "Make it true if you want auto typing.",
-      "required": false,
-      "value": "false"
-    },
-
-    "AUTO_REACT": {
-      "description": "Make it true if you want react on every message.",
-      "required": false,
-      "value": "false"
-    },
-    
-    "CUSTOM_REACT": {
-      "description": "Make it true if you want custom reactions.",
-      "required": false,
-      "value": "false"
-      
-    }, 
-    
-    "CUSTOM_REACT_EMOJIS": {
-      "description": "put here custom react react emojis.",
-      "required": false,
-      "value": "💝,💖,💗,❤️‍🩹,❤️,🧡,💛,💚,💙,💜,🤎,🖤,🤍"
-    }, 
-    
-    "ANTI_DEL_PATH": {
-      "description": "change it to -same- if you want to resend deleted message in same chat othwise inbox",
-      "required": false,
-      "value": "inbox"
-    }, 
-
-    "ADMIN_ACTION": {
-      "description": "make it true if want know who promote or demote a member .",
-      "required": false,
-      "value": "false"
-    },
-
-    "WELCOME": {
-      "description": "make it true if want welcome message in groups.",
-      "required": false,
-      "value": "false"
-    },
-
-    "GOODBYE": {
-      "description": "make it true if want goodbye message in groups.",
-      "required": false,
-      "value": "false"
-    },
-
-    "READ_MESSAGE": {
-      "description": "Make it true if you want bot read your all sms just now.",
-      "required": false,
-      "value": "false"
+      "value": ""
     }
 
 },
