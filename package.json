@@ -1,19 +1,14 @@
 
 
 {
-  "name": "SHARK-MD",
+  "name": "Sila-Md",
   "version": "0.0.5",
   "description": "A WhatsApp Bot Created By Brian",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node index.js",
-    "pm2:start": "pm2 start index.js --deep-monitoring --attach --name SHARK-MD",
-    "pm2:stop": "pm2 stop SHARK-MD",
-    "pm2:restart": "pm2 restart SHARK-MD"
-  },
-  "engines": {
-    "node": "18.x"
+    "start": "pm2 start index.js --deep-monitoring --attach --name Sila-Md",
+    "stop": "pm2 stop Sila-Md",
+    "restart": "pm2 restart Sila-Md"
   },
   "dependencies": {
        "@whiskeysockets/baileys": "npm:baileys-pro@latest",

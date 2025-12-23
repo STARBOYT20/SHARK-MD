@@ -55,7 +55,7 @@ cmd({
 *📝 Title:* ${meta.title}
 *👤 Channel:* ${meta.channel}
 *⏱️ Duration:* ${meta.duration}
-*💫 Powered by STARBOY*`;
+*💫 Powered by Silas MD*`;
 
     // Send thumbnail + info
     if (buffer) {

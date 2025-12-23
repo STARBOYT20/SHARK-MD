@@ -14,10 +14,10 @@ cmd({
         const seconds = Math.floor(uptime % 60);
 
         const aliveMessage = `
-    🤖 *SHARK MD IS ALIVE!* 🟢
+🤖 *SILA-MD IS ALIVE!* 🟢
 
-    👤 *User:* ${pushname}
-    📱 *Bot Name:* SHARK MD
+👤 *User:* ${pushname}
+📱 *Bot Name:* Sila-Md
 ⏰ *Uptime:* ${hours}h ${minutes}m ${seconds}s
 🔄 *Version:* 0.0.5
 💻 *Platform:* ${process.platform}
@@ -25,18 +25,18 @@ cmd({
 
 📍 *Type* .menu *to see all commands*
 
-🔗 *Powered by STARBOY*
+🔗 *Powered by Sila-Md*
         `.trim();
 
         // Send alive message with image
         await conn.sendMessage(from, {
-            image: { url: 'https://files.catbox.moe/k4h5mm.png' },
+            image: { url: 'https://files.catbox.moe/jwmx1j.jpg' },
             caption: aliveMessage
         }, { quoted: mek });
 
     } catch (e) {
         console.error("Error:", e);
         // Fallback to text only if image fails
-        reply(`🤖 *SHARK MD IS ALIVE!* 🟢\n\nUser: ${pushname}\nBot is running smoothly!\n\n🔗 *Powered by STARBOY*`);
+        reply(`🤖 *SILA-MD IS ALIVE!* 🟢\n\nUser: ${pushname}\nBot is running smoothly!\n\n🔗 *Powered by Sila-Md*`);
     }
 });

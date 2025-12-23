@@ -1,21 +1,21 @@
 {
-  "name": "SHARK MD",
+  "name": "SILA-MD",
   "description": "Javascript WhatsApp bot made by  Brian",
-  "logo": "https://files.catbox.moe/k4h5mm.png",
-  "keywords": ["SHARK-MD"],
+  "logo": "https://n.uguu.se/enxBsCxO.jpg",
+  "keywords": ["SILA-MD"],
   "success_url": "/",
 
     "stack": "container",
   "env": {
     "SESSION_ID": {
-      "description": "Session id. Must start with prefix 'POPKID;;;' followed by the token.",
+      "description": "Must Start with 'Sila~'",
       "required": false,
       "value": ""
     },
       "BOT_NAME": {
         "description": "write here your bot name.",
         "required": true,
-        "value": "SHARK MD"      
+        "value": "SILA-MD-s2"      
     },  
     "MODE": {
       "description": "Set private/public/inbox/groups",
@@ -32,25 +32,18 @@
     "OWNER_NAME": {
       "description": "Put Owner Name Here",
       "required": true,
-      "value": "STARBOY"
+      "value": "SILA"
     },
     "OWNER_NUMBER": {
       "description": "Put only one Owner Number Here",
       "required": true,
-      "value": "255627417402"
+      "value": "255612491554"
     },
     
     "PRESENCE": {
       "description": "Put online/typing/recording/unavailable",
       "required": true,
       "value": "online"
-    }
-
-    ,
-    "SESSION_URL": {
-      "description": "Optional URL to session creds (mega.nz or direct HTTPS). Preferred for Heroku.",
-      "required": false,
-      "value": ""
     }
 
 },

@@ -1,6 +1,6 @@
 const { cmd } = require('../command');
 
-// Fixed & Created By Shark
+// Fixed & Created By Sila
 cmd({
   pattern: "hidetag",
   alias: ["tag", "tagall"],  

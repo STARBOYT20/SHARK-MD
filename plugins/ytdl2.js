@@ -41,7 +41,7 @@ cmd({
 ║ ⿻ *ᴀᴜᴛʜᴏʀ:*  ${yts.author.name}
 ║ ⿻ *ʟɪɴᴋ:*  ${yts.url}
 ╚══════════════════❒
-*Powered by STARBOY*`;
+*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚂𝙸𝙻𝙰 𝙼𝙳*`;
 
         // Send video details
         await conn.sendMessage(from, { image: { url: data.result.thumbnail || '' }, caption: ytmsg }, { quoted: mek });
@@ -54,7 +54,7 @@ cmd({
             document: { url: data.result.download_url }, 
             mimetype: "video/mp4", 
             fileName: `${data.result.title}.mp4`, 
-            caption: `*${yts.title}*\n> *© Powered by STARBOY*`
+            caption: `*${yts.title}*\n> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚂𝙸𝙻𝙰 𝙼𝙳*`
         }, { quoted: mek });
 
     } catch (e) {
@@ -101,7 +101,7 @@ const yt = await ytsearch(q);
 ║ ⿻ *ᴀᴜᴛʜᴏʀ:*  ${yts.author.name}
 ║ ⿻ *ʟɪɴᴋ:*  ${yts.url}
 ╚══════════════════❒
-*Powered by STARBOY *`;
+*𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚂𝙸𝙻𝙰 𝙼𝙳 *`;
 
 
 
@@ -116,7 +116,7 @@ const yt = await ytsearch(q);
         document: { url: data.result.downloadUrl }, 
         mimetype: "audio/mpeg", 
         fileName: `${data.result.title}.mp3`, 
-        caption: `> *© Powered by STARBOY*`
+        caption: `> *© 𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 𝚂𝙸𝙻𝙰 𝙼𝙳*`
     }, { quoted: mek });
 
 } catch (e) {

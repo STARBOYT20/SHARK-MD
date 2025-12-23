@@ -11,7 +11,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, reply }) => {
     try {
-        const menuCaption = `╭━━━《*☠SHARK-MD-s2☠*》 ━━━┈⊷
+        const menuCaption = `╭━━━《*☠𝐒𝐈𝐋𝐀-𝐌𝐃-𝐬2☠*》 ━━━┈⊷
 ┃☠╭──────────────
 ┃☠│ *Usᴇʀ* : ${config.OWNER_NAME}
 ┃☠│ *ʙᴀɪʟᴇʏs* : 𝐌𝐮𝐥𝐭𝐢 𝐝𝐞𝐯𝐢𝐜𝐞
@@ -43,9 +43,9 @@ cmd({
             mentionedJid: [m.sender],
             forwardingScore: 999,
             isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363420222821450@newsletter',
-                newsletterName:'SHARK TECH' ,
+            forwardedNewsletterMessageInfo: {
+                newsletterJid: '120363402325089913@newsletter',
+                newsletterName:'𝐒𝐈𝐋𝐀 𝐓𝐄𝐂𝐇' ,
                 serverMessageId: 143
             }
         };
@@ -56,7 +56,7 @@ cmd({
                 return await conn.sendMessage(
                     from,
                     {
-                        image: { url: config.MENU_IMAGE_URL || 'https://files.catbox.moe/k4h5mm.png' },
+                        image: { url: config.MENU_IMAGE_URL || 'https://files.catbox.moe/jwmx1j.jpg' },
                         caption: menuCaption,
                         contextInfo: contextInfo
                     },
@@ -424,7 +424,7 @@ cmd({
                                 await conn.sendMessage(
                                     senderID,
                                     {
-                                        image: { url: config.MENU_IMAGE_URL || 'https://files.catbox.moe/k4h5mm.png' },
+                                        image: { url: config.MENU_IMAGE_URL || 'https://files.catbox.moe/jwmx1j.jpg' },
                                         caption: selectedMenu.content,
                                         contextInfo: contextInfo
                                     },

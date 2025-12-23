@@ -45,7 +45,7 @@ ${VALID_COUNTRIES.map(c => `• ${c.charAt(0).toUpperCase() + c.slice(1)}`).join
         
         await conn.sendMessage(from, {
             image: imageBuffer,
-            caption: `🥧 *Pies from ${country.charAt(0).toUpperCase() + country.slice(1)}*\n\n🔗 *Powered by STARBOY*`
+            caption: `🥧 *Pies from ${country.charAt(0).toUpperCase() + country.slice(1)}*\n\n🔗 *Powered by Sila-Md*`
         }, { quoted: mek });
 
     } catch (e) {
