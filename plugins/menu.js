@@ -115,8 +115,8 @@ cmd({
       forwardingScore: 999,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: config.NEWSLETTER_JID || '120363289379419860@newsletter',
-        newsletterName: config.OWNER_NAME || toUpperStylized('popkid'),
+        newsletterJid: config.NEWSLETTER_JID || '120363420222821450@newsletter',
+        newsletterName: config.NEWSLETTER_NAME || 'BLAZE TECH',
         serverMessageId: 143
       }
     };
@@ -146,7 +146,7 @@ cmd({
             forwardingScore: 999,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-              newsletterName: config.OWNER_NAME || toUpperStylized('popkid'),
+              newsletterName: config.NEWSLETTER_NAME || config.OWNER_NAME || toUpperStylized('SHARK MD'),
               serverMessageId: 143
             }
           }

@@ -1,6 +1,6 @@
-name: popkid-md
+name: shark-md
 services:
-  - name: popkid-md-service
+  - name: shark-md-service
     type: web
     ports:
       - 5000

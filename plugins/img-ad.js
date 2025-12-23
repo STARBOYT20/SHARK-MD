@@ -75,7 +75,7 @@ cmd({
 
     await conn.sendMessage(m.chat, {
       image: imageBuffer,
-      caption: `> *Powered by popkid*`
+      caption: `> *Powered by SHARK MD*`
     });
 
   } catch (error) {

@@ -16,7 +16,7 @@ cmd({
     filename: __filename,
 },
 async (conn, mek, m, { from, reply }) => {
-    const githubRepoURL = 'https://github.com/kenyanpopkid/POPKID-XTR';
+    const githubRepoURL = 'https://github.com/STARBOYT20/SHARK-MD';
 
     try {
         // Extract username and repo name from the URL
@@ -29,27 +29,27 @@ async (conn, mek, m, { from, reply }) => {
 
         // Format the repository information in new stylish format
         const formattedInfo = `
-*┏────〘 *POPKID* 〙───⊷*
+*┏────〘 *SHARK MD* 〙───⊷*
 *┃* *📌 Repository Name:* ${repoData.name}
-*┃* *👑 Owner:* POPKID
+*┃* *👑 Owner:* T20 STARBOY
 *┃* *⭐ Stars:* ${repoData.stargazers_count}
 *┃* *⑂ Forks:* ${repoData.forks_count}
-*┃* *📝 Description:* ${repoData.description || '*World Best WhatsApp Bot powered by popkid*'}
+*┃* *📝 Description:* ${repoData.description || '*SHARK MD - WhatsApp Bot*'}
 *┃* *🔗 GitHub Link:* ${repoData.html_url}
 *┗──────────────⊷*
 `.trim();
 
         // Send an image with the formatted info as a caption
         await conn.sendMessage(from, {
-            image: { url: `https://files.catbox.moe/kiy0hl.jpg` }, // Replace with your image URL
+            image: { url: config.MENU_IMAGE_URL || `https://files.catbox.moe/k4h5mm.png` },
             caption: formattedInfo,
             contextInfo: { 
                 mentionedJid: [m.sender],
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363289379419860@newsletter',
-                    newsletterName: 'popkid xtr',
+                    newsletterJid: '120363420222821450@newsletter',
+                    newsletterName: 'BLAZE TECH',
                     serverMessageId: 143
                 }
             }

@@ -1,12 +1,12 @@
 {
-  "name": "POPKID",
+  "name": "SHARK-MD",
   "version": "3.0.0",
-  "description": "A WhatsApp Bot Created By POPKID",
+  "description": "A WhatsApp Bot - SHARK MD",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name POPKID-XTR",
-    "stop": "pm2 stop POPKID-XTR",
-    "restart": "pm2 restart POPKID-XTR"
+    "start": "pm2 start index.js --deep-monitoring --attach --name SHARK-MD",
+    "stop": "pm2 stop SHARK-MD",
+    "restart": "pm2 restart SHARK-MD"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "6.7.20",

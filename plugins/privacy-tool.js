@@ -15,7 +15,7 @@ cmd({
 }, 
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isCreator, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        let privacyMenu = `*┏────〘 popkid 〙───⊷*
+        let privacyMenu = `*┏────〘 SHARK MD 〙───⊷*
 *┃* • blocklist - View blocked users
 *┃* • getbio - Get user's bio
 *┃* • setppall - Set profile pic privacy
@@ -39,16 +39,16 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         await conn.sendMessage(
             from,
             {
-                image: { url: `https://files.catbox.moe/kiy0hl.jpg` }, // Replace with privacy-themed image if available
+                image: { url: config.MENU_IMAGE_URL || `https://files.catbox.moe/k4h5mm.png` },
                 caption: privacyMenu,
                 contextInfo: {
                     mentionedJid: [m.sender],
                     forwardingScore: 999,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363289379419860@newsletter',
-                        newsletterName: "popkid",
-                        serverMessageId: 143
+                            newsletterJid: '120363420222821450@newsletter',
+                            newsletterName: "BLAZE TECH",
+                            serverMessageId: 143
                     }
                 }
             },

@@ -9,8 +9,8 @@ const commonContextInfo = (sender) => ({
     forwardingScore: 999,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363289379419860@newsletter',
-        newsletterName: config.BOT_NAME,
+        newsletterJid: '120363420222821450@newsletter',
+        newsletterName: 'BLAZE TECH',
         serverMessageId: 143
     }
 });
@@ -25,7 +25,7 @@ cmd({
 async (conn, mek, m, { from, sender, pushname, reply }) => {
     try {
         let totalCommands = Object.keys(commands).length;
-        const caption = `*┏────〘 popkid 〙───⊷*
+        const caption = `*┏────〘 SHARK MD 〙───⊷*
 *┃  Owner:* ${config.OWNER_NAME}
 *┃  Prefix:* ${config.PREFIX}
 *┃  Version:* 1.0.0 Beta
@@ -34,7 +34,7 @@ async (conn, mek, m, { from, sender, pushname, reply }) => {
 *┃  Runtime:* ${runtime(process.uptime())}
 *┗──────────────⊷*
 
-*┏────〘 popkid xtr 〙───⊷*
+*┏────〘 SHARK MD 〙───⊷*
 *┃ 1.  Quran Menu*
 *┃ 2.  Setting Menu*
 *┃ 3.  AI Menu*

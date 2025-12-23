@@ -18,7 +18,7 @@ cmd({
     // Check if quoted message exists and has media
     const quotedMsg = message.quoted ? message.quoted : message;
     const mimeType = (quotedMsg.msg || quotedMsg).mimetype || '';
-    
+
     if (!mimeType) {
       throw "Please reply to an image, video, or audio file";
     }
@@ -34,7 +34,7 @@ cmd({
     else if (mimeType.includes('image/png')) extension = '.png';
     else if (mimeType.includes('video')) extension = '.mp4';
     else if (mimeType.includes('audio')) extension = '.mp3';
-    
+
     const fileName = `file${extension}`;
 
     // Prepare form data for Catbox
@@ -65,7 +65,7 @@ cmd({
       `*${mediaType} Uploaded Successfully*\n\n` +
       `*Size:* ${formatBytes(mediaBuffer.length)}\n` +
       `*URL:* ${mediaUrl}\n\n` +
-      `> *popkid*`
+      `> *SHARK MD*`
     );
 
   } catch (error) {

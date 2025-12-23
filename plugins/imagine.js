@@ -27,7 +27,7 @@ cmd({
 
     await conn.sendMessage(m.chat, {
       image: imageBuffer,
-      caption: `💸 *powered by popkid* 🚀\n✨ Prompt: *${q}*`
+      caption: `💸 *powered by SHARK MD* 🚀\n✨ Prompt: *${q}*`
     });
 
   } catch (error) {
@@ -61,7 +61,7 @@ cmd({
 
     await conn.sendMessage(m.chat, {
       image: imageBuffer,
-      caption: `💸 *powered by popkid*🚀\n✨ Prompt: *${q}*`
+      caption: `💸 *powered by SHARK MD*🚀\n✨ Prompt: *${q}*`
     });
 
   } catch (error) {
@@ -95,7 +95,7 @@ cmd({
 
     await conn.sendMessage(m.chat, {
       image: imageBuffer,
-      caption: `💸 *powered by popkid*🚀\n✨ Prompt: *${q}*`
+      caption: `💸 *powered by SHARK MD*🚀\n✨ Prompt: *${q}*`
     });
 
   } catch (error) {
