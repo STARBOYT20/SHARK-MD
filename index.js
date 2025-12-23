@@ -877,6 +877,28 @@ if (!isReact && config.CUSTOM_REACT === 'true') {
   app.get("/", (req, res) => {
   res.send("SHARK MD STARTED ✅");
   });
+  // Health check endpoint for deployment platforms
+  app.get('/_health', (req, res) => {
+    res.json({ status: 'ok', uptime: process.uptime(), timestamp: Date.now() });
+  });
+  // Global error handlers to attempt recovery and keep process alive
+  process.on('uncaughtException', (err) => {
+    console.error('[uncaughtException] Unhandled error:', err);
+    setTimeout(() => {
+      try { connectToWA(); } catch (e) { console.error('Reconnect after uncaughtException failed:', e); }
+    }, 5000);
+  });
+  process.on('unhandledRejection', (reason) => {
+    console.error('[unhandledRejection] Promise rejection:', reason);
+    setTimeout(() => {
+      try { connectToWA(); } catch (e) { console.error('Reconnect after unhandledRejection failed:', e); }
+    }, 5000);
+  });
+  process.on('SIGTERM', async () => {
+    console.log('SIGTERM received. Shutting down gracefully.');
+    try { if (conn && conn.logout) await conn.logout(); } catch (e) { /* ignore */ }
+    process.exit(0);
+  });
   app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
   setTimeout(() => {
   connectToWA()
