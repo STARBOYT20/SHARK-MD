@@ -1,21 +1,20 @@
 {
-  "name": "SILA-MD",
-  "description": "Javascript WhatsApp bot made by  Brian",
+  "name": "SHARK-MD",
+  "description": "Javascript WhatsApp bot made by Brian",
+  "repository": "https://github.com/STARBOYT20/SHARK-MD",
   "logo": "https://n.uguu.se/enxBsCxO.jpg",
-  "keywords": ["SILA-MD"],
+  "keywords": ["SHARK-MD"],
   "success_url": "/",
-
-    "stack": "container",
   "env": {
     "SESSION_ID": {
-      "description": "Must Start with 'Sila~'",
+      "description": "Provide SESSION_ID starting with 'POPKID;;;' or set SESSION_URL",
       "required": false,
       "value": ""
     },
       "BOT_NAME": {
         "description": "write here your bot name.",
         "required": true,
-        "value": "SILA-MD-s2"      
+        "value": "SHARK-MD"      
     },  
     "MODE": {
       "description": "Set private/public/inbox/groups",
@@ -32,7 +31,7 @@
     "OWNER_NAME": {
       "description": "Put Owner Name Here",
       "required": true,
-      "value": "SILA"
+      "value": "SHARK"
     },
     "OWNER_NUMBER": {
       "description": "Put only one Owner Number Here",
@@ -48,11 +47,11 @@
 
 },
 
-     "buildpacks": [
-        {
-            "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
-        }
-     ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+    }
+  ],
   "stack": "heroku-24"
 }
   
