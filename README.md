@@ -89,57 +89,22 @@ Heroku CLI alternative:
 ```bash
 heroku create my-shark-md-bot
 heroku config:set OWNER_NUMBER=255627417402 NEWSLETTER_JID=120363420222821450@newsletter --app my-shark-md-bot
-git push https://git.heroku.com/my-shark-md-bot.git main
-```
-
-Notes:
-
-- Heroku's free dynos are no longer available; choose a paid dyno for continuous operation.
-- Ensure session persistence (`sessions/creds.json`) or `SESSION_ID` to avoid re-login.
-
----
-
-## Docker
-
-Build and run locally with Docker:
-
-```bash
-docker build -t shark-md .
+<!-- Large SHARK MD SVG Banner -->
+<p align="center">
+	<svg xmlns="http://www.w3.org/2000/svg" width="720" height="240" viewBox="0 0 900 300" role="img" aria-label="SHARK MD logo">
+		<defs>
+			<linearGradient id="sharkGrad" x1="0" x2="1">
+				<stop offset="0" stop-color="#00e0ff"/>
+				<stop offset="1" stop-color="#0066ff"/>
+			</linearGradient>
+			<filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+				<feDropShadow dx="0" dy="6" stdDeviation="12" flood-opacity="0.25"/>
+			</filter>
+		</defs>
+		<rect width="900" height="300" rx="24" fill="#041126"/>
+		<g filter="url(#shadow)">
+			<path d="M120 180 C 180 120, 320 100, 420 120 C 520 140, 640 180, 760 160 C 700 120, 640 80, 520 80 C 420 80, 320 100, 240 140 C 180 160, 140 170, 120 180 Z" fill="url(#sharkGrad)" opacity="0.98"/>
+			<path d="M280 140 C 300 120, 360 100, 420 110" stroke="#012
 docker run -d --name shark-md \ 
+
 	-e OWNER_NUMBER=255627417402 \ 
-	-v $(pwd)/sessions:/root/shark-md/sessions \ 
-	shark-md
-```
-
----
-
-## Koyeb / Cloud
-
-Use the included `koyeb.yaml` and set secrets via the Koyeb dashboard. The service spec includes examples for scale and resources.
-
----
-
-## Configuration
-
-All defaults are declared in `config.js`. Override via environment variables for secrets and runtime tuning.
-
-Example envs:
-
-- `OWNER_NUMBER=255627417402`
-- `SESSION_ID=shark-session`
-- `MENU_IMAGE_URL=https://files.catbox.moe/k4h5mm.png`
-- `NEWSLETTER_JID=120363420222821450@newsletter`
-- `NEWSLETTER_NAME=BLAZE TECH`
-
----
-
-## Contributing
-
-Contributions are welcome. Open issues or PRs, and follow the project's code style. For quick help, join the Telegram/WhatsApp group link above.
-
----
-
-## License
-
-MIT — see the `LICENSE` file for details.
-
