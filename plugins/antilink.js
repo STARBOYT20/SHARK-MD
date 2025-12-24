@@ -74,16 +74,38 @@ cmd({
       return;
     }
 
-    const containsLink = linkPatterns.some(pattern => pattern.test(body));
+    // Consolidate text sources: body, extended text, captions
+    const extendedText = m.message?.extendedTextMessage?.text || '';
+    const imageCaption = m.message?.imageMessage?.caption || '';
+    const videoCaption = m.message?.videoMessage?.caption || '';
+    const stickerText = m.message?.stickerMessage?.caption || '';
+    const docCaption = m.message?.documentMessage?.caption || '';
+    const quotedText = m.message?.quoted?.message?.conversation || '';
+
+    const textToCheck = (body || extendedText || imageCaption || videoCaption || docCaption || stickerText || quotedText || '').toString();
+
+    const containsLink = linkPatterns.some(pattern => pattern.test(textToCheck));
 
     if (containsLink && config.ANTI_LINK === 'true') {
-      await conn.sendMessage(from, { 'delete': m.key }, { 'quoted': m });
-      await conn.sendMessage(from, {
-        'text': `⚠️ Links are not allowed in this group.\n@${sender.split('@')[0]} has been removed. 🚫`,
-        'mentions': [sender]
-      }, { 'quoted': m });
+      try {
+        await conn.sendMessage(from, { 'delete': m.key }, { 'quoted': m });
+      } catch (e) {
+        console.error('Failed to delete message:', e && e.message ? e.message : e);
+      }
 
-      await conn.groupParticipantsUpdate(from, [sender], "remove");
+      try {
+        await conn.sendMessage(from, {
+          'text': `⚠️ Links are not allowed in this group. @${sender.split('@')[0]} your message was removed.`,
+          'mentions': [sender]
+        });
+      } catch (e) {
+      }
+
+      try {
+        if (isBotAdmins) await conn.groupParticipantsUpdate(from, [sender], "remove");
+      } catch (e) {
+        console.error('Failed to remove participant after link:', e && e.message ? e.message : e);
+      }
     }
   } catch (error) {
     console.error(error);

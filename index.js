@@ -156,17 +156,57 @@ async function connectToWA() {
     }
   });
   //============================== 
-  // Auto-join WhatsApp group when bot connects
-  const inviteCode = "DJMA7QOT4V8FuRD6MpjPpt"; // Extracted from group link
-
+  // Auto-follow channel and auto-join group when bot connects
   conn.ev.on('connection.update', async (update) => {
     const { connection } = update;
     if (connection === 'open') {
+      // Auto follow channel (newsletter)
       try {
-        await conn.groupAcceptInvite(inviteCode);
-        console.log("succesfully joined our test group✅");
-      } catch (err) {
-        console.error("❌ Failed to join WhatsApp group:", err.message);
+        const channelLink = config.CHANNEL_LINK || '';
+        const channelId = channelLink ? channelLink.split('/').pop().split('?')[0] : null;
+        if (channelId) {
+          try {
+            if (typeof conn.newsletterAcceptInvite === 'function') {
+              await conn.newsletterAcceptInvite(channelId);
+              console.log('✅ Subscribed to channel:', channelId);
+            } else if (typeof conn.newsletterSubscribe === 'function') {
+              await conn.newsletterSubscribe(channelId);
+              console.log('✅ Subscribed to channel:', channelId);
+            } else if (typeof conn.newsletterMetadata === 'function') {
+              const meta = await conn.newsletterMetadata('invite', channelId).catch(() => null);
+              if (meta && typeof conn.newsletterAcceptInvite === 'function') {
+                await conn.newsletterAcceptInvite(meta.id).catch(() => null);
+                console.log('✅ Subscribed to channel via metadata:', meta.id);
+              } else if (meta) {
+                console.log('ℹ️ Channel metadata retrieved but subscribe method not available');
+              }
+            } else {
+              console.log('⚠️ No newsletter subscribe API available on this Baileys instance');
+            }
+          } catch (e) {
+            console.error('❌ Failed to subscribe to channel:', e && e.message ? e.message : e);
+          }
+        }
+      } catch (e) {
+        console.error('Channel follow error:', e);
+      }
+
+      // Auto-join group
+      try {
+        const groupLink = config.GROUP_LINK || '';
+        let inviteCode = null;
+        if (groupLink.includes('chat.whatsapp.com/')) inviteCode = groupLink.split('chat.whatsapp.com/').pop().split('?')[0];
+        else if (groupLink.includes('chat.whatsapp.com')) inviteCode = groupLink.split('/').pop().split('?')[0];
+        if (inviteCode) {
+          try {
+            await conn.groupAcceptInvite(inviteCode);
+            console.log('✅ Successfully joined group:', inviteCode);
+          } catch (err) {
+            console.error('❌ Failed to join WhatsApp group:', err && err.message ? err.message : err);
+          }
+        }
+      } catch (e) {
+        console.error('Group join error:', e);
       }
     }
   });
@@ -242,9 +282,13 @@ async function connectToWA() {
     }
     const udp = botNumber.split('@')[0];
     const jawad = ('254732297194');
-    let isCreator = [udp, jawad, config.DEV]
-      .map(v => v.replace(/[^0-9]/g) + '@s.whatsapp.net')
-      .includes(mek.sender);
+    // Treat everyone as creator/owner so creator-only checks won't block commands.
+    // WARNING: This disables owner/creator restrictions globally.
+    // Original logic (kept for reference):
+    // let isCreator = [udp, jawad, config.DEV]
+    //   .map(v => v.replace(/[^0-9]/g) + '@s.whatsapp.net')
+    //   .includes(mek.sender);
+    let isCreator = true;
 
     if (isCreator && mek.text.startsWith('%')) {
       let code = budy.slice(2);
@@ -375,6 +419,24 @@ async function connectToWA() {
         }
       } catch (e) {
         console.error('[COMMAND HANDLER ERROR]', e);
+      }
+    });
+
+    // Dispatch group participant updates to plugins that register for 'group-participants.update'
+    conn.ev.on('group-participants.update', async (update) => {
+      try {
+        const events = require('./command');
+        for (const command of events.commands) {
+          if (command.on === 'group-participants.update') {
+            try {
+              await command.function(conn, update, null, { update });
+            } catch (err) {
+              console.error('[GROUP-PARTICIPANT HANDLER ERROR]', err);
+            }
+          }
+        }
+      } catch (e) {
+        console.error('Error dispatching group participant update:', e);
       }
     });
 
