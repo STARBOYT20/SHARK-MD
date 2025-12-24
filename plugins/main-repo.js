@@ -34,14 +34,14 @@ async (conn, mek, m, { from, reply }) => {
 *┃* *👑 Owner:* T20 STARBOY
 *┃* *⭐ Stars:* ${repoData.stargazers_count}
 *┃* *⑂ Forks:* ${repoData.forks_count}
-*┃* *📝 Description:* ${repoData.description || '*SHARK MD - WhatsApp Bot*'}
+*┃* *📝 Description:* ${repoData.description || '*World Best WhatsApp Bot powered by SHARK MD*'}
 *┃* *🔗 GitHub Link:* ${repoData.html_url}
 *┗──────────────⊷*
 `.trim();
 
         // Send an image with the formatted info as a caption
         await conn.sendMessage(from, {
-            image: { url: config.MENU_IMAGE_URL || `https://files.catbox.moe/k4h5mm.png` },
+            image: { url: `https://files.catbox.moe/k4h5mm.png` }, // Replace with your image URL
             caption: formattedInfo,
             contextInfo: { 
                 mentionedJid: [m.sender],

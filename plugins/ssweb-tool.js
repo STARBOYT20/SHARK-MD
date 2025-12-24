@@ -69,7 +69,7 @@ cmd({
     await conn.sendMessage(from, {
         image: { url: `https://image.thum.io/get/fullpage/${url}` },
         caption: "- 🖼️ *Screenshot Generated*\n\n" +
-            "> SHARK MD"
+                "> popkid"
     }, { quoted: mek });
 
   } catch (error) {
@@ -78,4 +78,4 @@ cmd({
   }
 });
 
-// ⿻ ⌜ SHARK MD ⌟⿻⃮͛𖤐
+// ⿻ ⌜ popkid ⌟⿻⃮͛𖤐

@@ -3,51 +3,27 @@ const moment = require('moment-timezone');
 const { cmd, commands } = require('../command');
 const { getPrefix } = require('../lib/prefix');
 
-// Stylized uppercase (ʜɪ style)
+// Stylized uppercase
 function toUpperStylized(str) {
-  const stylized = {
+  const map = {
     A: 'ᴀ', B: 'ʙ', C: 'ᴄ', D: 'ᴅ', E: 'ᴇ', F: 'ғ', G: 'ɢ', H: 'ʜ',
     I: 'ɪ', J: 'ᴊ', K: 'ᴋ', L: 'ʟ', M: 'ᴍ', N: 'ɴ', O: 'ᴏ', P: 'ᴘ',
     Q: 'ǫ', R: 'ʀ', S: 's', T: 'ᴛ', U: 'ᴜ', V: 'ᴠ', W: 'ᴡ', X: 'x',
     Y: 'ʏ', Z: 'ᴢ'
   };
-  return str.split('').map(c => stylized[c.toUpperCase()] || c).join('');
+  return str.split('').map(c => map[c.toUpperCase()] || c).join('');
 }
 
-// Normalize category
 const normalize = (str) =>
   str.toLowerCase().replace(/\s+menu$/, '').trim();
 
-// Emojis per category
 const emojiByCategory = {
-  ai: '🤖',
-  anime: '🍥',
-  audio: '🎧',
-  bible: '📖',
-  download: '⬇️',
-  downloader: '📥',
-  fun: '🎮',
-  game: '🕹️',
-  group: '👥',
-  img_edit: '🖌️',
-  info: 'ℹ️',
-  information: '🧠',
-  logo: '🖼️',
-  main: '🏠',
-  media: '🎞️',
-  menu: '📜',
-  misc: '📦',
-  music: '🎵',
-  owner: '👑',
-  privacy: '🔒',
-  search: '🔎',
-  settings: '⚙️',
-  sticker: '🌟',
-  tools: '🛠️',
-  user: '👤',
-  utilities: '🧰',
-  wallpapers: '🖼️',
-  whatsapp: '📱'
+  ai: '🤖', anime: '🍥', audio: '🎧', bible: '📖',
+  download: '⬇️', downloader: '📥', fun: '🎮', game: '🕹️',
+  group: '👥', img_edit: '🖌️', info: 'ℹ️', music: '🎵',
+  owner: '👑', search: '🔎', settings: '⚙️',
+  sticker: '🌟', tools: '🛠️', user: '👤', utilities: '🧰',
+  wallpapers: '🖼️', whatsapp: '📱'
 };
 
 cmd({
@@ -55,38 +31,39 @@ cmd({
   alias: ['allmenu'],
   desc: 'Show all bot commands',
   category: 'menu',
-  react: '👌',
+  react: '✨',
   filename: __filename
 }, async (conn, mek, m, { from, sender, reply }) => {
   try {
     const prefix = getPrefix();
-    const timezone = config.TIMEZONE || 'Africa/Nairobi';
-    const time = moment().tz(timezone).format('HH:mm:ss');
-    const date = moment().tz(timezone).format('dddd, DD MMMM YYYY');
+    const tz = config.TIMEZONE || 'Africa/Nairobi';
+    const time = moment().tz(tz).format('HH:mm:ss');
+    const date = moment().tz(tz).format('dddd, DD MMM YYYY');
 
     const uptime = () => {
-      let sec = process.uptime();
-      let h = Math.floor(sec / 3600);
-      let m = Math.floor((sec % 3600) / 60);
-      let s = Math.floor(sec % 60);
-      return `${h}h ${m}m ${s}s`;
+      const s = process.uptime();
+      return `${Math.floor(s / 3600)}h ${Math.floor((s % 3600) / 60)}m ${Math.floor(s % 60)}s`;
     };
 
-    // HEADER
+    // 🌌 HEADER (NEON GLASS)
     let menu = `
-╭━━━〔 🦈 𝗦𝗛𝗔𝗥𝗞 𝗠𝗗 〕━━━╮
-┃ 👤 𝗨𝗦𝗘𝗥 : @${sender.split('@')[0]}
-┃ ⏳ 𝗥𝗨𝗡𝗧𝗜𝗠𝗘 : ${uptime()}
-┃ ⚙️ 𝗠𝗢𝗗𝗘 : ${config.MODE}
-┃ 🔣 𝗣𝗥𝗘𝗙𝗜𝗫 : ${config.PREFIX}
-┃ 👑 𝗢𝗪𝗡𝗘𝗥 : ${config.OWNER_NAME}
-┃ 🧩 𝗣𝗟𝗨𝗚𝗜𝗡𝗦 : ${commands.length}
-┃ 🕒 ${time}
-┃ 📆 ${date}
-╰━━━━━━━━━━━━━━━━━━━━╯
+╔════════════════════════════════════╗
+║   ✦ 🦈 𝗦 𝗛 𝗔 𝗥 𝗞   𝗠 𝗗 ✦   ║
+╠════════════════════════════════════╣
+║ 👤 User    : @${sender.split('@')[0]}
+║ ⏳ Runtime : ${uptime()}
+║ ⚙️ Mode    : ${config.MODE}
+║ 🔣 Prefix  : ${config.PREFIX}
+║ 👑 Owner   : ${config.OWNER_NAME}
+║ 🧩 Plugins : ${commands.length}
+║ 🕒 Time    : ${time}
+║ 📆 Date    : ${date}
+╚════════════════════════════════════╝
+
+✧✧✧ 𝗘𝗫𝗣𝗟𝗢𝗥𝗘 • 𝗖𝗢𝗡𝗧𝗥𝗢𝗟 • 𝗣𝗢𝗪𝗘𝗥 ✧✧✧
 `;
 
-    // GROUP COMMANDS BY CATEGORY
+    // GROUP COMMANDS
     const categories = {};
     for (const c of commands) {
       if (c.category && !c.dontAdd && c.pattern) {
@@ -96,29 +73,31 @@ cmd({
       }
     }
 
-    // ROYAL CATEGORY STYLE (STYLE 5)
+    // 👑 GLOW ROYAL CATEGORY CARDS (WITH BADGES)
     for (const cat of Object.keys(categories).sort()) {
-      const emoji = cat === 'owner'
-        ? '👑'
-        : (emojiByCategory[cat] || '✨');
+      const list = categories[cat].sort();
+      const count = String(list.length).padStart(2, '0');
+      const isOwner = cat === 'owner';
+      const emoji = isOwner ? '👑' : (emojiByCategory[cat] || '✨');
+      const title = toUpperStylized(cat);
 
       menu += `
-╔═══════〔 ${emoji}  ${toUpperStylized(cat)} 〕═══════╗
+╔═══════〔 ${emoji}  ${title} 〕═══════〔 ${count} 〕═══════╗
 `;
-      for (const cmdName of categories[cat].sort()) {
-        menu += `║ ✪ ${prefix}${cmdName}\n`;
+      for (const name of list) {
+        menu += `║  ${isOwner ? '✪' : '✦'}  ${prefix}${name}\n`;
       }
-      menu += `╚══════════════════════════════╝\n`;
+      menu += `╚══════════════════════════════════════════════════╝\n`;
     }
 
-    // FOOTER
+    // 🌟 FOOTER (SOFT GLOW)
     menu += `
-━━━━━━━━━━━━━━━━━━━
-✨ ${config.DESCRIPTION || 'Powerful • Fast • Reliable'}
-━━━━━━━━━━━━━━━━━━━
+✦────────────────────────────────────────────✦
+🌟 ${config.DESCRIPTION || 'Fast • Secure • Premium Experience'}
+🔔 Follow our channel for updates
+✦────────────────────────────────────────────✦
 `;
 
-    // SEND MENU IMAGE
     await conn.sendMessage(
       from,
       {
@@ -131,6 +110,6 @@ cmd({
 
   } catch (e) {
     console.error(e);
-    await reply('❌ Failed to load menu.');
+    reply('❌ Menu failed to load.');
   }
 });

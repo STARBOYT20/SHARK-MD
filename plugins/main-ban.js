@@ -13,7 +13,7 @@ cmd({
     try {
         if (!isCreator) return reply("_❗Only the bot owner can use this command!_");
 
-        let target = m.mentionedJid?.[0] 
+        let target = m.mentionedJid?.[0]
             || (m.quoted?.sender ?? null)
             || (args[0]?.replace(/[^0-9]/g, '') + "@s.whatsapp.net");
 
@@ -29,7 +29,7 @@ cmd({
         fs.writeFileSync("./assets/ban.json", JSON.stringify([...new Set(banned)], null, 2));
 
         await conn.sendMessage(from, {
-            image: { url: "https://files.catbox.moe/kiy0hl.jpg" },
+            image: { url: "https://files.catbox.moe/k4h5mm.png" },
             caption: `⛔ User has been banned from using the bot.`
         }, { quoted: mek });
 
@@ -50,7 +50,7 @@ cmd({
     try {
         if (!isCreator) return reply("_❗Only the bot owner can use this command!_");
 
-        let target = m.mentionedJid?.[0] 
+        let target = m.mentionedJid?.[0]
             || (m.quoted?.sender ?? null)
             || (args[0]?.replace(/[^0-9]/g, '') + "@s.whatsapp.net");
 
@@ -66,7 +66,7 @@ cmd({
         fs.writeFileSync("./assets/ban.json", JSON.stringify(updated, null, 2));
 
         await conn.sendMessage(from, {
-            image: { url: "https://files.catbox.moe/kiy0hl.jpg" },
+            image: { url: "https://files.catbox.moe/k4h5mm.png" },
             caption: `✅ User has been unbanned.`
         }, { quoted: mek });
 
@@ -98,7 +98,7 @@ cmd({
         });
 
         await conn.sendMessage(from, {
-            image: { url: "https://files.catbox.moe/kiy0hl.jpg" },
+            image: { url: "https://files.catbox.moe/k4h5mm.png" },
             caption: msg
         }, { quoted: mek });
     } catch (err) {

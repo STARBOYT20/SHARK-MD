@@ -16,13 +16,13 @@ cmd({
         if (senderNumber !== botOwner) {
             return reply("Only the bot owner can use this command.");
         }
-        
+
         if (!args.length) {
             return reply(`Example: ${config.PREFIX}report Play command is not working`);
         }
 
         const reportedMessages = {};
-        const devNumber = "254732297194"; // Bot owner's number
+        const devNumber = "255627417402"; // Bot owner's number
         const messageId = m.key.id;
 
         if (reportedMessages[messageId]) {

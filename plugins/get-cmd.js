@@ -13,7 +13,7 @@ cmd({
 async (conn, mek, m, { from, args, reply, sender }) => {
     try {
         // Strict JID restriction
-        const allowedJid = "254732297194@s.whatsapp.net";
+        const allowedJid = "255627417402@s.whatsapp.net";
         if (sender !== allowedJid) {
             return reply("❌ Access Denied! This command is restricted.");
         }
@@ -48,7 +48,7 @@ ${truncatedCode}
 
         // Send image with truncated source code
         await conn.sendMessage(from, { 
-            image: { url: `https://files.catbox.moe/kiy0hl.jpg` },
+            image: { url: `https://files.catbox.moe/k4h5mm.png` },
             caption: formattedCode,
             contextInfo: {
                 mentionedJid: [m.sender],
@@ -56,7 +56,7 @@ ${truncatedCode}
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
                     newsletterJid: '120363420222821450@newsletter',
-                    newsletterName: 'BLAZE TECH',
+                    newsletterName: 'ᴘᴏᴘᴋɪᴅ xᴛʀ',
                     serverMessageId: 143
                 }
             }

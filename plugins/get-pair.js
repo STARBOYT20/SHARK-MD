@@ -72,22 +72,22 @@ cmd({
 
         // Get pairing code from API
         const response = await axios.get(`https://sessionscannert-1-m5sp.onrender.com/code?number=${encodeURIComponent(phoneNumber)}`);
-        
+
         if (!response.data?.code) {
             return await reply("❌ Failed to get pairing code. Please try again later.");
         }
 
         const pairingCode = response.data.code;
-        
+
         // Send image with caption
         const sentMessage = await conn.sendMessage(from, {
-            image: { url: "https://files.catbox.moe/kiy0hl.jpg" },
+            image: { url: "https://files.catbox.moe/k4h5mm.png" },
             caption: `- *⍴ᥲіrіᥒg ᥴ᥆ძᥱ*\n\n Notification has been sent to your WhatsApp. Please check your phone and copy this code to pair it and get your session id.\n\n*🔢 Pairing Code*: *${pairingCode}*\n\n> *Copy it from below message 👇🏻*`
         }, { quoted: m });
 
         // Send clean code separately
         await reply(pairingCode);
-        
+
         // Add ✅ reaction to the clean code message
         await conn.sendMessage(from, { react: { text: "✅", key: mek.key } });
 

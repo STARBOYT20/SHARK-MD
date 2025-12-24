@@ -41,7 +41,7 @@ async (conn, mek, m, { from, q, sender, reply }) => {
 │• 🔄 Updated: ${app.updated}
 │• 🔗 Link: ${app.url}
 ╰─────────────────
-> SHARK MD`.trim();
+> popkid`.trim();
 
         if (app.icon) {
             await conn.sendMessage(

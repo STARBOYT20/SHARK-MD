@@ -33,15 +33,15 @@ cmd({
 
     // Create the response message
     const message = `
-  *SHARK MD NPM SEARCH*
+*POPKID-MD NPM SEARCH*
 
-  *🔰 NPM PACKAGE:* ${packageName}
-  *📄 DESCRIPTION:* ${description}
-  *⏸️ LAST VERSION:* ${latestVersion}
-  *🪪 LICENSE:* ${license}
-  *🪩 REPOSITORY:* ${repository}
-  *🔗 NPM URL:* ${npmUrl}
-  `;
+*🔰 NPM PACKAGE:* ${packageName}
+*📄 DESCRIPTION:* ${description}
+*⏸️ LAST VERSION:* ${latestVersion}
+*🪪 LICENSE:* ${license}
+*🪩 REPOSITORY:* ${repository}
+*🔗 NPM URL:* ${npmUrl}
+`;
 
     // Send the message
     await conn.sendMessage(from, { text: message }, { quoted: mek });

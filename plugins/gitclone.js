@@ -54,11 +54,11 @@ cmd({
         mentionedJid: [m.sender],
         forwardingScore: 999,
         isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-              newsletterJid: '120363420222821450@newsletter',
-              newsletterName: 'BLAZE TECH',
-              serverMessageId: 143
-            }
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: '120363420222821450@newsletter',
+          newsletterName: 'BLAZE TECH',
+          serverMessageId: 143
+        }
       }
     }, { quoted: m });
 
