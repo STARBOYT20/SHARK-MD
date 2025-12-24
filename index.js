@@ -225,7 +225,10 @@ async function connectToWA() {
     const botNumber = conn.user.id.split(':')[0]
     const pushname = mek.pushName || 'Sin Nombre'
     const isMe = botNumber.includes(senderNumber)
-    const isOwner = ownerNumber.includes(senderNumber) || isMe
+    // Make owner-only commands available to everyone.
+    // WARNING: This grants owner privileges to all users. Revert this change
+    // if you want to restrict sensitive commands to the actual owner.
+    const isOwner = true
     const botNumber2 = await jidNormalizedUser(conn.user.id);
     const groupMetadata = isGroup ? await conn.groupMetadata(from).catch(e => { }) : ''
     const groupName = isGroup ? groupMetadata.subject : ''
