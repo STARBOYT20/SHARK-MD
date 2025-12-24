@@ -65,16 +65,32 @@ const clearTempDir = () => {
 setInterval(clearTempDir, 5 * 60 * 1000);
 
 //===================SESSION-AUTH============================
-if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
-  if (!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-  const sessdata = config.SESSION_ID.replace("POPKID;;;", '');
-  const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
-  filer.download((err, data) => {
-    if (err) throw err
-    fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
-      console.log("SESSIO-ID CONNECTED 🙂")
-    })
-  })
+// If SESSION_DATA env is provided (base64 of creds.json), write it to sessions/creds.json
+try {
+  if (process.env.SESSION_DATA) {
+    if (!fs.existsSync(__dirname + '/sessions')) fs.mkdirSync(__dirname + '/sessions')
+    const decoded = Buffer.from(process.env.SESSION_DATA, 'base64')
+    fs.writeFileSync(__dirname + '/sessions/creds.json', decoded)
+    console.log('Loaded session from SESSION_DATA env')
+  } else if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
+    if (!config.SESSION_ID) console.log('No session found: set SESSION_DATA or SESSION_ID env to restore session')
+    else {
+      const sessdata = config.SESSION_ID.replace("POPKID;;;", '');
+      const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
+      filer.download((err, data) => {
+        if (err) {
+          console.error('Failed to download session from Mega:', err)
+          return
+        }
+        if (!fs.existsSync(__dirname + '/sessions')) fs.mkdirSync(__dirname + '/sessions')
+        fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
+          console.log("SESSIO-ID CONNECTED 🙂")
+        })
+      })
+    }
+  }
+} catch (e) {
+  console.error('Session load error:', e)
 }
 
 const express = require("express");
@@ -143,7 +159,28 @@ async function connectToWA() {
       conn.sendMessage(conn.user.id, { image: { url: `https://files.catbox.moe/k4h5mm.png` }, caption: up })
     }
   })
-  conn.ev.on('creds.update', saveCreds)
+  // Wrap saveCreds so we can also emit a base64 copy for easy persistence to Heroku config
+  const originalSaveCreds = saveCreds
+  conn.ev.on('creds.update', async () => {
+    try {
+      await originalSaveCreds()
+    } catch (e) {
+      try { originalSaveCreds() } catch (err) { console.error('saveCreds error', err) }
+    }
+    try {
+      // read creds file and output base64 to console and to session.b64 for easy copy
+      const credsPath = __dirname + '/sessions/creds.json'
+      if (fs.existsSync(credsPath)) {
+        const data = fs.readFileSync(credsPath)
+        const b64 = Buffer.from(data).toString('base64')
+        console.log('---- COPY THIS and set as Heroku CONFIG VAR: SESSION_DATA ----')
+        console.log(b64)
+        try { fs.writeFileSync(__dirname + '/session.b64', b64) } catch (e) { }
+      }
+    } catch (e) {
+      console.error('Failed to emit session base64:', e)
+    }
+  })
 
   //==============================
 
