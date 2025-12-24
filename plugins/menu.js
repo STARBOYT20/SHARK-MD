@@ -1,11 +1,9 @@
 const config = require('../config');
 const moment = require('moment-timezone');
 const { cmd, commands } = require('../command');
-const { runtime } = require('../lib/functions');
-const os = require('os');
 const { getPrefix } = require('../lib/prefix');
 
-// Fonction pour styliser les majuscules comme ʜɪ
+// Stylized uppercase (ʜɪ style)
 function toUpperStylized(str) {
   const stylized = {
     A: 'ᴀ', B: 'ʙ', C: 'ᴄ', D: 'ᴅ', E: 'ᴇ', F: 'ғ', G: 'ɢ', H: 'ʜ',
@@ -16,10 +14,11 @@ function toUpperStylized(str) {
   return str.split('').map(c => stylized[c.toUpperCase()] || c).join('');
 }
 
-// Normalisation des catégories
-const normalize = (str) => str.toLowerCase().replace(/\s+menu$/, '').trim();
+// Normalize category
+const normalize = (str) =>
+  str.toLowerCase().replace(/\s+menu$/, '').trim();
 
-// Emojis par catégorie normalisée
+// Emojis per category
 const emojiByCategory = {
   ai: '🤖',
   anime: '🍥',
@@ -39,7 +38,6 @@ const emojiByCategory = {
   menu: '📜',
   misc: '📦',
   music: '🎵',
-  other: '📁',
   owner: '👑',
   privacy: '🔒',
   search: '🔎',
@@ -48,9 +46,8 @@ const emojiByCategory = {
   tools: '🛠️',
   user: '👤',
   utilities: '🧰',
-  utility: '🧮',
   wallpapers: '🖼️',
-  whatsapp: '📱',
+  whatsapp: '📱'
 };
 
 cmd({
@@ -75,89 +72,65 @@ cmd({
       return `${h}h ${m}m ${s}s`;
     };
 
+    // HEADER
     let menu = `
-*┏────〘 ᴘᴏᴘᴋɪᴅ xᴛʀ 〙───⊷*
-*┃ ᴜꜱᴇʀ : @${sender.split("@")[0]}*
-*┃ ʀᴜɴᴛɪᴍᴇ : ${uptime()}*
-*┃ ᴍᴏᴅᴇ : ${config.MODE}*
-*┃ ᴘʀᴇғɪx : 「 ${config.PREFIX}」* 
-*┃ ᴏᴡɴᴇʀ : ${config.OWNER_NAME}*
-*┃ ᴘʟᴜɢɪɴꜱ : 『 ${commands.length} 』*
-*┃ ᴅᴇᴠ : ᴘᴏᴘᴋɪᴅ*
-*┃ ᴠᴇʀꜱɪᴏɴ : 2.0.0*
-*┗──────────────⊷*`;
+╭━━━〔 🦈 𝗦𝗛𝗔𝗥𝗞 𝗠𝗗 〕━━━╮
+┃ 👤 𝗨𝗦𝗘𝗥 : @${sender.split('@')[0]}
+┃ ⏳ 𝗥𝗨𝗡𝗧𝗜𝗠𝗘 : ${uptime()}
+┃ ⚙️ 𝗠𝗢𝗗𝗘 : ${config.MODE}
+┃ 🔣 𝗣𝗥𝗘𝗙𝗜𝗫 : ${config.PREFIX}
+┃ 👑 𝗢𝗪𝗡𝗘𝗥 : ${config.OWNER_NAME}
+┃ 🧩 𝗣𝗟𝗨𝗚𝗜𝗡𝗦 : ${commands.length}
+┃ 🕒 ${time}
+┃ 📆 ${date}
+╰━━━━━━━━━━━━━━━━━━━━╯
+`;
 
-    // Group commands by category (improved logic)
+    // GROUP COMMANDS BY CATEGORY
     const categories = {};
-    for (const cmd of commands) {
-      if (cmd.category && !cmd.dontAdd && cmd.pattern) {
-        const normalizedCategory = normalize(cmd.category);
-        categories[normalizedCategory] = categories[normalizedCategory] || [];
-        categories[normalizedCategory].push(cmd.pattern.split('|')[0]);
+    for (const c of commands) {
+      if (c.category && !c.dontAdd && c.pattern) {
+        const cat = normalize(c.category);
+        categories[cat] = categories[cat] || [];
+        categories[cat].push(c.pattern.split('|')[0]);
       }
     }
 
-    // Add sorted categories with stylized text
+    // ROYAL CATEGORY STYLE (STYLE 5)
     for (const cat of Object.keys(categories).sort()) {
-      const emoji = emojiByCategory[cat] || '🧛‍♂️';
-      menu += `\n\n*┏─『 ${emoji} ${toUpperStylized(cat)} ${toUpperStylized('Menu')} 』──⊷*\n`;
-      for (const cmd of categories[cat].sort()) {
-        menu += `*│ ${prefix}${cmd}*\n`;
+      const emoji = cat === 'owner'
+        ? '👑'
+        : (emojiByCategory[cat] || '✨');
+
+      menu += `
+╔═══════〔 ${emoji}  ${toUpperStylized(cat)} 〕═══════╗
+`;
+      for (const cmdName of categories[cat].sort()) {
+        menu += `║ ✪ ${prefix}${cmdName}\n`;
       }
-      menu += `*┗──────────────⊷*`;
+      menu += `╚══════════════════════════════╝\n`;
     }
 
-    menu += `\n\n> ${config.DESCRIPTION || toUpperStylized('Explore the bot commands!')}`;
+    // FOOTER
+    menu += `
+━━━━━━━━━━━━━━━━━━━
+✨ ${config.DESCRIPTION || 'Powerful • Fast • Reliable'}
+━━━━━━━━━━━━━━━━━━━
+`;
 
-    // Context info for image message
-    const imageContextInfo = {
-      mentionedJid: [sender],
-      forwardingScore: 999,
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: config.NEWSLETTER_JID || '120363420222821450@newsletter',
-        newsletterName: config.NEWSLETTER_NAME || 'BLAZE TECH',
-        serverMessageId: 143
-      }
-    };
-
-    // Send menu image
+    // SEND MENU IMAGE
     await conn.sendMessage(
       from,
       {
         image: { url: config.MENU_IMAGE_URL || 'https://files.catbox.moe/kiy0hl.jpg' },
         caption: menu,
-        contextInfo: imageContextInfo
+        mentions: [sender]
       },
       { quoted: mek }
     );
 
-    // Send audio if configured
-    if (config.MENU_AUDIO_URL) {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      await conn.sendMessage(
-        from,
-        {
-          audio: { url: config.MENU_AUDIO_URL },
-          mimetype: 'audio/mp4',
-          ptt: true,
-          contextInfo: {
-            mentionedJid: [sender],
-            forwardingScore: 999,
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-              newsletterName: config.NEWSLETTER_NAME || config.OWNER_NAME || toUpperStylized('SHARK MD'),
-              serverMessageId: 143
-            }
-          }
-        },
-        { quoted: mek }
-      );
-    }
-
   } catch (e) {
-    console.error('Menu Error:', e.message);
-    await reply(`❌ ${toUpperStylized('Error')}: Failed to show menu. Try again.\n${toUpperStylized('Details')}: ${e.message}`);
+    console.error(e);
+    await reply('❌ Failed to load menu.');
   }
 });
-
